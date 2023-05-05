@@ -7,3 +7,5 @@ winget install -e --id Bitwarden.Bitwarden
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Valve.Steam
 winget install -e --id Microsoft.PowerShell
+# without this Everquests throws
+winget install -e --id Microsoft.DirectX
