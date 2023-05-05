@@ -6,3 +6,4 @@ winget install -e --id Bitwarden.Bitwarden
 # winget install -e --id DominikReichl.KeePass
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Valve.Steam
+winget install -e --id Microsoft.PowerShell
