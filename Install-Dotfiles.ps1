@@ -16,3 +16,6 @@ winget install -e --id Valve.Steam
 winget install -e --id Microsoft.PowerShell
 winget install -e --id schollz.croc
 
+if (-Not (Test-Path -Path $USERPROFILE/.ssh)) {
+  ssh-keygen -t ed25519 -C "klas@mellbourn.net"
+}
