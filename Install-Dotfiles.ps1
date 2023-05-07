@@ -1,3 +1,4 @@
+Push-Location $USERPROFILE
 # foundational
 winget install -e --id Git.Git
 
@@ -15,7 +16,13 @@ winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Valve.Steam
 winget install -e --id Microsoft.PowerShell
 winget install -e --id schollz.croc
+winget install -e --id gerardog.gsudo
 
-if (-Not (Test-Path -Path $USERPROFILE/.ssh)) {
+if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
 }
+
+if (-Not (Test-Path -Path .gitconfig)) {
+  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target code/dotfiles-windows/.gitconfig
+}
+Pop-Location

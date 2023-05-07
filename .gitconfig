@@ -1,0 +1,47 @@
+[mergetool]
+    keepbackup = false
+[alias]
+    ci = commit
+    br = branch
+    co = checkout
+    st = status
+    mt = mergetool
+    dt = difftool
+    last = log -1 HEAD
+    lol = log --graph --all
+    lo = log --graph
+[fetch]
+    prune = true
+[log]
+    decorate = short
+    abbrevcommit = true
+    date = relative
+[push]
+    default = simple
+[rerere]
+    enabled = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+[core]
+    fscache = true
+    longpaths = true
+    editor = code --wait
+    autocrlf = false
+[format]
+    pretty = %C(yellow)%h %C(magenta)%<(15,trunc)%an %C(cyan)%<(12,trunc)%cd %C(auto)%d%Creset %s
+[user]
+    name = Klas Mellbourn
+    email = klas@mellbourn.net
+[merge]
+    tool = kdiff3
+[diff]
+    guitool = kdiff3
+[mergetool "kdiff3"]
+    path = C:/Program Files/KDiff3/kdiff3.exe
+[difftool "kdiff3"]
+    path = C:/Program Files/KDiff3/kdiff3.exe
+[safe]
+    directory = C:/Users/Klas/code
+    directory = C:/Users/Klas/code/dotfiles-windows
