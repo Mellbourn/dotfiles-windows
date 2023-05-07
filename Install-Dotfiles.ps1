@@ -12,11 +12,17 @@ winget install -e --id Nvidia.GeForceExperience
 winget install -e --id Google.Chrome
 winget install -e --id Bitwarden.Bitwarden
 # winget install -e --id DominikReichl.KeePass
-winget install -e --id Microsoft.VisualStudioCode
-winget install -e --id Valve.Steam
-winget install -e --id Microsoft.PowerShell
 winget install -e --id schollz.croc
+
+# developer
+winget install -e --id Microsoft.VisualStudioCode
+winget install -e --id Microsoft.PowerShell
 winget install -e --id gerardog.gsudo
+
+# games
+winget install -e --id Valve.Steam
+
+# non installation configuration
 
 if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
