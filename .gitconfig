@@ -1,5 +1,6 @@
 [core]
-    autocrlf = input
+#    autocrlf = input
+    eol = lf
 [mergetool]
     keepbackup = false
 [alias]

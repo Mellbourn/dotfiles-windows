@@ -11,7 +11,7 @@ Git.Git
 Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience
 
 # misc
-Google.Chrome, Bitwarden.Bitwarden, schollz.croc, Twilio.Authy
+Google.Chrome, Bitwarden.Bitwarden, schollz.croc, Twilio.Authy, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # developer
