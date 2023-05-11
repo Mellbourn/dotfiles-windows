@@ -1,26 +1,42 @@
 Push-Location $USERPROFILE
+
+$InstallListString = "
+
 # foundational
-winget install -e --id Git.Git
+Git.Git
 
 # hardware related
 # without this Everquests throws Missing d3dx9_43.dll. Note, winget fails to detect this being installed
-#winget install -e --id Microsoft.DirectX
-winget install -e --id Intel.IntelDriverAndSupportAssistant
-winget install -e --id Nvidia.GeForceExperience
+#Microsoft.DirectX
+Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience
 
 #misc
-winget install -e --id Google.Chrome
-winget install -e --id Bitwarden.Bitwarden
-# winget install -e --id DominikReichl.KeePass
-winget install -e --id schollz.croc
+Google.Chrome, Bitwarden.Bitwarden, schollz.croc
+# DominikReichl.KeePass
 
 # developer
-winget install -e --id Microsoft.VisualStudioCode
-winget install -e --id Microsoft.PowerShell
-winget install -e --id gerardog.gsudo
+Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo
 
 # games
-winget install -e --id Valve.Steam
+Valve.Steam
+
+"
+$InstallList = $InstallListString -split "`n"
+foreach ($InstallLineString in $InstallList) {
+  $InstallLine = $InstallLineString.Trim()
+  if ($InstallLine -ne "" -and $InstallLine -notlike "#*") {
+    $Install = $InstallLine.Split(",")
+    foreach ($InstallItem in $Install) {
+      $InstallItem = $InstallItem.Trim()
+      if ($InstallItem -ne "") {
+        Write-Output "`nInstalling '$InstallItem'"
+        winget install -e --id $InstallItem
+      }
+    }
+  }
+}
+
+return
 
 # non installation configuration
 
