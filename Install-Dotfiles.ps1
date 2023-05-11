@@ -6,12 +6,12 @@ $InstallListString = "
 Git.Git
 
 # hardware related
-# without this Everquests throws Missing d3dx9_43.dll. Note, winget fails to detect this being installed
+# without DirectX Everquests throws Missing d3dx9_43.dll. Note, winget fails to detect this being installed
 #Microsoft.DirectX
 Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience
 
-#misc
-Google.Chrome, Bitwarden.Bitwarden, schollz.croc
+# misc
+Google.Chrome, Bitwarden.Bitwarden, schollz.croc, Twilio.Authy
 # DominikReichl.KeePass
 
 # developer

@@ -1,3 +1,5 @@
+[core]
+    autocrlf = input
 [mergetool]
     keepbackup = false
 [alias]
