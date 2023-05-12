@@ -80,15 +80,16 @@ if (-Not (Test-Path -Path nerd-fonts)) {
 Push-Location nerd-fonts
 git pull
 $InstallFontsString = "JetBrainsMono,CascadiaCode"
+$FontsAliasString = "JetBrainsMono,CaskaydiaCove"
 $InstallFontsList = $InstallFontsString -split ","
+$FontsAliasList = $FontsAliasString -split ","
 [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
-foreach ($InstallFontsString in $InstallFontsList) {
-  $InstallFont = $InstallFontsString.Trim()
-  if ($InstallFont -ne "") {
-    if (-Not ((New-Object System.Drawing.Text.InstalledFontCollection).Families | Select-String $InstallFont)) {
-      Write-Verbose "`nInstalling '$InstallFont'"
-      .\install.ps1 $InstallFont
-    }
+for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
+  $InstallFont = $InstallFontsList[$i]
+  $FontAlias = $FontsAliasList[$i]
+  if (-Not ((New-Object System.Drawing.Text.InstalledFontCollection).Families | Select-String $FontAlias)) {
+    Write-Verbose "`nInstalling '$FontAlias'"
+    .\install.ps1 $InstallFont
   }
 }
 Pop-Location
