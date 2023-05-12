@@ -1,4 +1,5 @@
-Push-Location $USERPROFILE
+[CmdletBinding()] param ()
+Push-Location $env:USERPROFILE
 
 $InstallListString = "
 
@@ -29,14 +30,12 @@ foreach ($InstallLineString in $InstallList) {
     foreach ($InstallItem in $Install) {
       $InstallItem = $InstallItem.Trim()
       if ($InstallItem -ne "") {
-        Write-Output "`nInstalling '$InstallItem'"
+        Write-Verbose "`nInstalling '$InstallItem'"
         winget install -e --id $InstallItem
       }
     }
   }
 }
-
-return
 
 # non installation configuration
 
@@ -64,5 +63,8 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
 
+# list potential updates
+Write-Verbose "`nPotential upgrades:"
+winget upgrade
 
 Pop-Location
