@@ -63,10 +63,6 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
 
-# needed for ssh?
-#Set-Service ssh-agent -StartupType Manual
-#Set-Service -Name sshd -StartupType 'Automatic'
-
 # needed for wsl?
 #these are needed for WSL 2 https://success.docker.com/article/manually-enable-docker-for-windows-prerequisites
 #Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
