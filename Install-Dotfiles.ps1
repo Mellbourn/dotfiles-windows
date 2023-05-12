@@ -1,4 +1,5 @@
 [CmdletBinding()] param ()
+$ErrorActionPreference = "Stop"
 Push-Location $env:USERPROFILE
 
 $InstallListString = "
