@@ -71,6 +71,13 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
 
+# terminal settings - couldn't get this to work, terminal recreates settings when moved?
+#$settingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+#if (-Not (Get-ChildItem $settingsPath).LinkType) {
+#  Move-Item $settingsPath "$settingsPath.bak"
+#  sudo New-Item -ItemType SymbolicLink -Path $settingsPath -Target $env:USERPROFILE/code/dotfiles-windows/terminal/settings.json
+#}
+
 # Fonts
 Write-Verbose "`nInstalling fonts"
 Push-Location code
