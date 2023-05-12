@@ -79,7 +79,7 @@ if (-Not (Test-Path -Path nerd-fonts)) {
 }
 Push-Location nerd-fonts
 git pull
-$InstallFontsString = "JetBrainsMono"
+$InstallFontsString = "JetBrainsMono,CascadiaCode"
 $InstallFontsList = $InstallFontsString -split ","
 [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 foreach ($InstallFontsString in $InstallFontsList) {
