@@ -32,6 +32,7 @@
     longpaths = true
     editor = code --wait
     autocrlf = false
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 [format]
     pretty = %C(yellow)%h %C(magenta)%<(15,trunc)%an %C(cyan)%<(12,trunc)%cd %C(auto)%d%Creset %s
 [user]

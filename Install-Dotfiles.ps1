@@ -40,8 +40,19 @@ foreach ($InstallLineString in $InstallList) {
 
 # non installation configuration
 
+# ssh
 if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
+}
+if ((Get-Service ssh-agent).StartType -ne "Automatic") {
+  sudo Set-Service ssh-agent -StartupType Automatic
+}
+if ((Get-Service ssh-agent).Status -ne "Running") {
+  Start-Service ssh-agent
+}
+if (-Not (Test-Path -Path .ssh/config)) {
+  sudo New-Item -ItemType SymbolicLink -Path .ssh/config -Target $env:USERPROFILE/code/dotfiles-windows/.ssh/config
+  ssh-add .ssh/id_ed25519
 }
 
 if (-Not (Test-Path -Path .gitconfig)) {
