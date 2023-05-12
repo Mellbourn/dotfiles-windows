@@ -75,6 +75,29 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
 
+# Fonts
+Write-Verbose "`nInstalling fonts"
+Push-Location code
+if (-Not (Test-Path -Path nerd-fonts)) {
+  git clone --filter=blob:none git@github.com:ryanoasis/nerd-fonts
+}
+Push-Location nerd-fonts
+git pull
+$InstallFontsString = "JetBrainsMono"
+$InstallFontsList = $InstallFontsString -split ","
+[System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+foreach ($InstallFontsString in $InstallFontsList) {
+  $InstallFont = $InstallFontsString.Trim()
+  if ($InstallFont -ne "") {
+    if (-Not ((New-Object System.Drawing.Text.InstalledFontCollection).Families | Select-String $InstallFont)) {
+      Write-Verbose "`nInstalling '$InstallFont'"
+      .\install.ps1 $InstallFont
+    }
+  }
+}
+Pop-Location
+Pop-Location
+
 # list potential updates
 Write-Verbose "`nPotential upgrades:"
 winget upgrade
