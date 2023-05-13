@@ -12,8 +12,11 @@ Git.Git
 #Microsoft.DirectX
 Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience, Kingston.SSDManager
 
+# security
+Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateInternetAccess
+
 # misc
-Google.Chrome, Bitwarden.Bitwarden, schollz.croc, Twilio.Authy, VideoLAN.VLC
+Google.Chrome, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # developer
