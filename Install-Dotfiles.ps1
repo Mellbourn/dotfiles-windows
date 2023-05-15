@@ -66,10 +66,12 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
 
-# needed for wsl?
-#these are needed for WSL 2 https://success.docker.com/article/manually-enable-docker-for-windows-prerequisites
-#Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-#Enable-WindowsOptionalFeature -Online -FeatureName Containers -All
+if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
+  wsl --update
+}
+else {
+  wsl --install -d Ubuntu
+}
 
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
