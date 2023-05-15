@@ -85,10 +85,9 @@ Install-Module -Name Recycle
 Write-Verbose "`nInstalling fonts"
 Push-Location code
 if (-Not (Test-Path -Path nerd-fonts)) {
-  git clone --filter=blob:none git@github.com:ryanoasis/nerd-fonts
+  git clone --filter=blob:none --depth=1 git@github.com:ryanoasis/nerd-fonts
 }
 Push-Location nerd-fonts
-git pull
 $InstallFontsString = "JetBrainsMono,CascadiaCode"
 $FontsAliasString = "JetBrainsMono,CaskaydiaCove"
 $InstallFontsList = $InstallFontsString -split ","
