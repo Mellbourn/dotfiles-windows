@@ -106,8 +106,7 @@ for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
 Pop-Location
 Pop-Location
 
-# list potential updates
-Write-Verbose "`nPotential upgrades:"
-winget upgrade
+Write-Verbose "`nUpgrading everything:"
+winget upgrade --all
 
 Pop-Location
