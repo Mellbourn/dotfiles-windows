@@ -16,7 +16,7 @@ Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience, Kingston.SSDMana
 Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateInternetAccess
 
 # misc
-Google.Chrome, VideoLAN.VLC
+Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # developer
@@ -43,7 +43,7 @@ foreach ($InstallLineString in $InstallList) {
 
 # non installation configuration
 
-# ssh
+Write-Verbose "`nConfiguring SSH"
 if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
 }
@@ -58,6 +58,7 @@ if (-Not (Test-Path -Path .ssh/config)) {
   ssh-add .ssh/id_ed25519
 }
 
+Write-Verbose "`nMiscellaneous configuration"
 if (-Not (Test-Path -Path .gitconfig)) {
   sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target code/dotfiles-windows/.gitconfig
 }
@@ -83,7 +84,6 @@ Install-Module -Name Recycle
 #  sudo New-Item -ItemType SymbolicLink -Path $settingsPath -Target $env:USERPROFILE/code/dotfiles-windows/terminal/settings.json
 #}
 
-# Fonts
 Write-Verbose "`nInstalling fonts"
 Push-Location code
 if (-Not (Test-Path -Path nerd-fonts)) {
