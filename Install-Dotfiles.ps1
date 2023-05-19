@@ -46,11 +46,18 @@ foreach ($InstallLineString in $InstallList) {
   }
 }
 
+$gitCryptPattern = "git-crypt-*-x86_64.exe"
+if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
+  $installCommand = "& $PSScriptRoot\Install-LatestRelease.ps1 -repoName AGWA/git-crypt -assetPattern $gitCryptPattern"
+  Invoke-Expression $installCommand
+  sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
+}
+
 # non installation configuration
 
 if (-Not (Test-Path -Path .gitconfig)) {
   Write-Verbose "`ngit configuration"
-  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target code/dotfiles-windows/.gitconfig
+  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target $PSScriptRoot/.gitconfig
 }
 
 Write-Verbose "`nConfiguring SSH"
@@ -64,7 +71,7 @@ if ((Get-Service ssh-agent).Status -ne "Running") {
   Start-Service ssh-agent
 }
 if (-Not (Test-Path -Path .ssh/config)) {
-  sudo New-Item -ItemType SymbolicLink -Path .ssh/config -Target $env:USERPROFILE/code/dotfiles-windows/.ssh/config
+  sudo New-Item -ItemType SymbolicLink -Path .ssh/config -Target $PSScriptRoot/.ssh/config
   ssh-add .ssh/id_ed25519
 }
 
