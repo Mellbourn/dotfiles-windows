@@ -1,0 +1,3 @@
+[submodule "windows-terminal-icons"]
+	path = windows-terminal-icons
+	url = https://github.com/TheFern2/windows-terminal-icons.git
