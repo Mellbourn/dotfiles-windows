@@ -2,6 +2,11 @@
 $ErrorActionPreference = "Stop"
 Push-Location $env:USERPROFILE
 
+
+if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
+  gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
+}
+
 $InstallListString = "
 
 # foundational
@@ -43,6 +48,11 @@ foreach ($InstallLineString in $InstallList) {
 
 # non installation configuration
 
+if (-Not (Test-Path -Path .gitconfig)) {
+  Write-Verbose "`ngit configuration"
+  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target code/dotfiles-windows/.gitconfig
+}
+
 Write-Verbose "`nConfiguring SSH"
 if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
@@ -58,22 +68,16 @@ if (-Not (Test-Path -Path .ssh/config)) {
   ssh-add .ssh/id_ed25519
 }
 
-Write-Verbose "`nMiscellaneous configuration"
-if (-Not (Test-Path -Path .gitconfig)) {
-  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target code/dotfiles-windows/.gitconfig
-}
-
-if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
-  gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
-}
-
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
+  Write-Verbose "`nWSL update"
   wsl --update
 }
 else {
+  Write-Verbose "`nWSL install"
   wsl --install -d Ubuntu
 }
 
+Write-Verbose "`nMiscellaneous configuration"
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
 
@@ -90,10 +94,10 @@ if (-Not (Test-Path -Path nerd-fonts)) {
   git clone --filter=blob:none --depth=1 git@github.com:ryanoasis/nerd-fonts
 }
 Push-Location nerd-fonts
-$InstallFontsString = "JetBrainsMono,CascadiaCode"
-$FontsAliasString = "JetBrainsMono,CaskaydiaCove"
-$InstallFontsList = $InstallFontsString -split ","
-$FontsAliasList = $FontsAliasString -split ","
+$InstallFontsString = "JetBrainsMono, CascadiaCode"
+$FontsAliasString = "JetBrainsMono, CaskaydiaCove"
+$InstallFontsList = $InstallFontsString -split ", "
+$FontsAliasList = $FontsAliasString -split ", "
 [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
   $InstallFont = $InstallFontsList[$i]
