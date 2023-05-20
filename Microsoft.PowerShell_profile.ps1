@@ -19,4 +19,6 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -BellStyle Audible -DingTone 100 -DingDuration 20
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+# this makes tab expansion work in git
+Set-PsFzfOption -TabExpansion
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }

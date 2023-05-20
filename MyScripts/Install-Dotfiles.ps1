@@ -104,6 +104,8 @@ Write-Verbose "`nInstall modules"
 Install-Module -Name Recycle
 Install-Module -Name z
 Install-Module -Name PSFzf
+# this is needed only for command line completion in PSFzf
+Install-Module -Name posh-git
 
 # terminal settings - couldn't get this to work, terminal recreates settings when moved?
 #$settingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
