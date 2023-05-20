@@ -126,7 +126,10 @@ for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
 Pop-Location
 Pop-Location
 
-Write-Verbose "`nUpgrading everything:"
+Write-Verbose "`nUpgrading all powershell modules:"
+Update-Module
+
+Write-Verbose "`nUpgrading everything installed with winget:"
 winget upgrade --all
 
 Pop-Location
