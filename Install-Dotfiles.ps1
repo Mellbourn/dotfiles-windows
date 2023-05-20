@@ -2,7 +2,6 @@
 $ErrorActionPreference = "Stop"
 Push-Location $env:USERPROFILE
 
-
 if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
@@ -51,8 +50,7 @@ foreach ($InstallLineString in $InstallList) {
 $gitCryptPattern = "git-crypt-*-x86_64.exe"
 if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
   Write-Verbose "`nInstalling git-crypt"
-  $installCommand = "& $PSScriptRoot\Install-LatestRelease.ps1 -repoName AGWA/git-crypt -assetPattern $gitCryptPattern"
-  Invoke-Expression $installCommand
+  Install-LatestRelease -repoName AGWA/git-crypt -assetPattern $gitCryptPattern
   sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
 }
 
