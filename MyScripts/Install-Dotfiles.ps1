@@ -95,6 +95,7 @@ else {
 }
 
 Write-Verbose "`nMiscellaneous configuration"
+Set-PSReadLineOption -BellStyle Audible -DingTone 100 -DingDuration 20
 # to get Remove-ItemSafely, i.e. deletion by moving to the trash
 Install-Module -Name Recycle
 Install-Module -Name z
