@@ -4,7 +4,7 @@ $env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/Scripts"
 
 Set-Alias g git
 function yb {
-    . "$PSScriptRoot\Install-Dotfiles.ps1" -Verbose
+    Install-Dotfiles -Verbose
 }
 
 Import-Module z
