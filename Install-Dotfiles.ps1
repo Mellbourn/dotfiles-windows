@@ -16,6 +16,8 @@ Git.Git
 # without DirectX Everquests throws Missing d3dx9_43.dll. Note, winget fails to detect this being installed
 #Microsoft.DirectX
 Intel.IntelDriverAndSupportAssistant, Nvidia.GeForceExperience, Kingston.SSDManager
+# Windows Scanner
+9WZDNCRFJ3PV
 
 # security
 Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateInternetAccess
