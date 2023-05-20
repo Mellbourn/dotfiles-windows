@@ -25,8 +25,11 @@ Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateI
 Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
+# terminal
+JanDeDobbeleer.OhMyPosh, junegunn.fzf
+
 # developer
-Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo, JanDeDobbeleer.OhMyPosh
+Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo
 
 # games
 Valve.Steam
