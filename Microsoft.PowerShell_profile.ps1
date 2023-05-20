@@ -17,3 +17,4 @@ Import-Module -Name Terminal-Icons
 
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -BellStyle Audible -DingTone 100 -DingDuration 20
