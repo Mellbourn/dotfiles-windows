@@ -50,9 +50,16 @@ foreach ($InstallLineString in $InstallList) {
 
 $gitCryptPattern = "git-crypt-*-x86_64.exe"
 if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
+  Write-Verbose "`nInstalling git-crypt"
   $installCommand = "& $PSScriptRoot\Install-LatestRelease.ps1 -repoName AGWA/git-crypt -assetPattern $gitCryptPattern"
   Invoke-Expression $installCommand
   sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
+}
+
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+if (-Not (Get-Module Terminal-Icons)) {
+  Write-Verbose "`nInstalling Terminal-Icons module"
+  Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
 }
 
 # non installation configuration
