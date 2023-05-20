@@ -1,6 +1,6 @@
 # this script is used by PowerShell 7
 
-$env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/Scripts"
+$env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/MyScripts"
 
 Set-Alias g git
 function yb {
