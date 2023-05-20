@@ -1,7 +1,6 @@
 # this script is used by PowerShell 7
 
-# should I set the path to $PSScriptRoot/Scripts instead?
-$env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot"
+$env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/Scripts"
 
 Set-Alias g git
 function yb {
