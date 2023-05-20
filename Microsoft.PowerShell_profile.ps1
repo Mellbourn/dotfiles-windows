@@ -2,6 +2,8 @@
 
 $env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/MyScripts"
 
+$env:CodeDir = "$env:USERPROFILE/code"
+
 Set-Alias g git
 function yb {
     Install-Dotfiles -Verbose

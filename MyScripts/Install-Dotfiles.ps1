@@ -61,6 +61,9 @@ if (-Not (Get-Module Terminal-Icons)) {
 }
 
 # non installation configuration
+if (-Not (Test-Path -Path $env:CodeDir/private)) {
+  New-Item -Type Directory -Path $env:CodeDir/private
+}
 
 if (-Not (Test-Path -Path .gitconfig)) {
   Write-Verbose "`ngit configuration"
@@ -104,9 +107,9 @@ Install-Module -Name z
 #}
 
 Write-Verbose "`nInstalling fonts"
-Push-Location code
+Push-Location $env:CodeDir/private
 if (-Not (Test-Path -Path nerd-fonts)) {
-  git clone --filter=blob:none --depth=1 git@github.com:ryanoasis/nerd-fonts
+  git clone --filter=blob:none --depth=1 --single-branch git@github.com:ryanoasis/nerd-fonts
 }
 Push-Location nerd-fonts
 $InstallFontsString = "JetBrainsMono, CascadiaCode"
