@@ -27,7 +27,7 @@ Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # developer
-Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo
+Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo, JanDeDobbeleer.OhMyPosh
 
 # games
 Valve.Steam
