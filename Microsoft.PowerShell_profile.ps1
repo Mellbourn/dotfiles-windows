@@ -26,3 +26,5 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # this makes tab expansion work in git
 Set-PsFzfOption -TabExpansion
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+
+$env:LESS = " --LONG-PROMPT --RAW-CONTROL-CHARS --ignore-case --HILITE-UNREAD --status-column --quiet --no-histdups --save-marks --quit-if-one-screen --incsearch --use-color"
