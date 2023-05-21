@@ -26,7 +26,7 @@ Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # terminal
-JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, jftuga.less
+JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, jftuga.less, sharkdp.bat
 
 # developer
 Microsoft.VisualStudioCode, Microsoft.PowerShell
