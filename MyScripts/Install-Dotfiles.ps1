@@ -26,10 +26,10 @@ Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # terminal
-JanDeDobbeleer.OhMyPosh, junegunn.fzf
+JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, jftuga.less
 
 # developer
-Microsoft.VisualStudioCode, Microsoft.PowerShell, gerardog.gsudo
+Microsoft.VisualStudioCode, Microsoft.PowerShell
 
 # games
 Valve.Steam

@@ -2,6 +2,10 @@
 
 $env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/MyScripts"
 
+# ripgrep is installed by winget, but incorrectly added to path
+$env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_*\ripgrep-*-x86_64-pc-windows-msvc)
+
+
 $env:CodeDir = "$env:USERPROFILE/code"
 
 Set-Alias g git
