@@ -84,9 +84,10 @@
       "segments": [
         {
           "type": "node",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
           "foreground": "p:green",
-          "background": "transparent",
+          "background": "p:blue",
           "template": "\ue718 ",
           "properties": {
             "display_mode": "files",
@@ -96,9 +97,10 @@
         },
         {
           "type": "go",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
           "foreground": "p:blue",
-          "background": "transparent",
+          "background": "p:blue",
           "template": "\ue626 ",
           "properties": {
             "fetch_version": false
@@ -106,9 +108,10 @@
         },
         {
           "type": "python",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
           "foreground": "p:yellow",
-          "background": "transparent",
+          "background": "p:blue",
           "template": "\ue235 ",
           "properties": {
             "display_mode": "files",
@@ -118,17 +121,19 @@
         },
         {
           "type": "shell",
-          "style": "plain",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
           "foreground": "p:white",
-          "background": "transparent",
-          "template": "in <p:blue><b>{{ .Name }}</b></> "
+          "background": "p:blue",
+          "template": "in <p:yellow><b>{{ .Name }}</b></> "
         },
         {
           "type": "time",
-          "style": "plain",
+          "style": "diamond",
           "foreground": "p:white",
-          "background": "transparent",
-          "template": "at <p:blue><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>"
+          "background": "p:blue",
+          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>",
+          "trailing_diamond": "\ue0b4"
         }
       ]
     },
@@ -190,7 +195,7 @@
   },
   "palette": {
     "black": "#262B44",
-    "blue": "#4B95E9",
+    "blue": "#0c29ce",
     "green": "#59C9A5",
     "orange": "#F07623",
     "red": "#D81E5B",
