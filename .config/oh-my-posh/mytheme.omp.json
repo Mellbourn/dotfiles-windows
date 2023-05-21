@@ -132,8 +132,16 @@
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
-          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>",
-          "trailing_diamond": "\ue0b4"
+          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05\" }}</b></> "
+        },
+        {
+          "background": "#ffffff",
+          "foreground": "#000000",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "os"
         }
       ]
     },
