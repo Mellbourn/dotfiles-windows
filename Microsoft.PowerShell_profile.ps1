@@ -16,7 +16,7 @@ function yb {
 
 Import-Module z
 
-oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh --config "$PSScriptRoot/.config/oh-my-posh/mytheme.omp.json" | Invoke-Expression
 
 Import-Module -Name Terminal-Icons
 
