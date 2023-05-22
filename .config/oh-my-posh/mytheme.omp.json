@@ -195,9 +195,11 @@
     }
   ],
   "transient_prompt": {
-    "foreground": "p:black",
+    "foreground": "#D4E157",
     "background": "transparent",
-    "template": "<p:yellow,transparent>\ue0b6</><,p:yellow> {{ .Folder }} </><p:yellow,transparent>\ue0b0</> "
+    "style": "plain",
+    "template": "\ue0b0 ",
+    "type": "exit"
   },
   "secondary_prompt": {
     "foreground": "p:black",
