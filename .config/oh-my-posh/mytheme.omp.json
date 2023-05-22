@@ -17,8 +17,9 @@
             "folder_icon": "\u2026",
             "folder_separator_icon": " <transparent>\ue0b1</> "
           },
-          "style": "powerline",
-          "powerline_symbol": "\ue0b6",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b0",
           "invert_powerline": true,
           "template": " \uea83 {{ .Path }} ",
           "type": "path"
@@ -58,12 +59,11 @@
         },
         {
           "type": "exit",
-          "style": "diamond",
+          "style": "powerline",
           "foreground": "p:white",
           "background": "p:blue",
           "background_templates": ["{{ if gt .Code 0 }}p:red{{ end }}"],
-          "leading_diamond": "<transparent,background>\ue0b0</>",
-          "trailing_diamond": "\ue0b4",
+          "powerline_symbol": "\ue0b0",
           "template": " {{ if gt .Code 0 }}\uf00d{{ else }}\uf00c{{ end }} ",
           "properties": {
             "always_enabled": true
@@ -118,8 +118,7 @@
           "style": "diamond",
           "foreground": "p:black",
           "background": "p:yellow",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b0",
+          "leading_diamond": "<background,transparent></>",
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} ",
           "min_width": 80
         },
@@ -128,6 +127,7 @@
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
+          "leading_diamond": "<background,parentBackground></>",
           "template": " in <p:yellow><b>{{ .Name }}</b></> "
         },
         {
@@ -142,6 +142,7 @@
           "foreground": "#000000",
           "style": "diamond",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "leading_diamond": "<background,parentBackground></>",
           "trailing_diamond": "\ue0b4",
           "type": "os"
         }
