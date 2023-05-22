@@ -82,7 +82,7 @@
           "leading_diamond": "\ue0b6",
           "foreground": "p:green",
           "background": "p:blue",
-          "template": "\ue718 ",
+          "template": "\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "properties": {
             "display_mode": "files",
             "fetch_package_manager": false,
