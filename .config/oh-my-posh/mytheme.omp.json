@@ -119,7 +119,7 @@
           "foreground": "p:black",
           "background": "p:cyan",
           "leading_diamond": "<background,transparent></>",
-          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} ",
+          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
           "min_width": 80
         },
         {
