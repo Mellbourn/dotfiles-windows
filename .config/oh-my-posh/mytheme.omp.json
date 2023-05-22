@@ -126,16 +126,17 @@
           "type": "shell",
           "style": "diamond",
           "foreground": "p:white",
-          "background": "p:blue",
+          "background": "p:navy",
           "leading_diamond": "<background,parentBackground></>",
           "template": " <p:yellow><b>{{ .Name }}</b></> "
         },
         {
           "type": "time",
           "style": "diamond",
+          "leading_diamond": "<background,parentBackground></>",
           "foreground": "p:white",
           "background": "p:blue",
-          "template": "<p:white><b>{{ .CurrentDate | date \"15:04:05  \" }}</b></> "
+          "template": "<p:white><b> {{ .CurrentDate | date \"15:04:05  \" }}</b></> "
         },
         {
           "background": "#ffffff",
@@ -214,6 +215,7 @@
     "orange": "#F07623",
     "red": "#D81E5B",
     "white": "#E0DEF4",
-    "yellow": "#fff34a"
+    "yellow": "#fff34a",
+    "navy": "#00897b"
   }
 }
