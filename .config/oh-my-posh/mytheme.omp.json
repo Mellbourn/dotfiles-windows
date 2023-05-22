@@ -78,8 +78,9 @@
       "segments": [
         {
           "type": "node",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "foreground": "p:green",
           "background": "p:blue",
           "template": "\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
@@ -91,8 +92,9 @@
         },
         {
           "type": "go",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "foreground": "p:blue",
           "background": "p:blue",
           "template": "\ue626 ",
@@ -102,8 +104,9 @@
         },
         {
           "type": "python",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "foreground": "p:yellow",
           "background": "p:blue",
           "template": "\ue235 ",
@@ -115,36 +118,41 @@
         },
         {
           "type": "executiontime",
-          "style": "diamond",
+          "style": "powerline",
           "foreground": "p:black",
           "background": "p:yellow",
-          "leading_diamond": "<background,transparent></>",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "properties": {
+            "threshold": 100,
             "style": "round"
           },
           "template": " {{ .FormattedMs }}   "
         },
         {
           "type": "session",
-          "style": "diamond",
+          "style": "powerline",
           "foreground": "p:black",
           "background": "p:cyan",
-          "leading_diamond": "<background,parentBackground></>",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
           "min_width": 80
         },
         {
           "type": "shell",
-          "style": "diamond",
+          "style": "powerline",
           "foreground": "p:white",
           "background": "p:navy",
-          "leading_diamond": "<background,parentBackground></>",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "template": " <p:yellow><b>{{ .Name }}</b></> "
         },
         {
           "type": "time",
-          "style": "diamond",
-          "leading_diamond": "<background,parentBackground></>",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
           "foreground": "p:white",
           "background": "p:blue",
           "template": "<p:white><b> {{ .CurrentDate | date \"15:04:05  \" }}</b></> "
@@ -154,7 +162,8 @@
           "foreground": "#000000",
           "style": "diamond",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "leading_diamond": "<background,parentBackground></>",
+          "invert_powerline": true,
+          "leading_diamond": "<background,foreground>\ue0b2</>",
           "trailing_diamond": "\ue0b4",
           "type": "os"
         }
