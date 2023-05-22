@@ -9,16 +9,6 @@
       "alignment": "left",
       "segments": [
         {
-          "type": "session",
-          "style": "diamond",
-          "foreground": "p:black",
-          "background": "p:yellow",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b0",
-          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} ",
-          "min_width": 80
-        },
-        {
           "background": "#0087af",
           "foreground": "#f2f3f8",
           "properties": {
@@ -28,7 +18,8 @@
             "folder_separator_icon": " <transparent>\ue0b1</> "
           },
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "\ue0b6",
+          "invert_powerline": true,
           "template": " \uea83 {{ .Path }} ",
           "type": "path"
         },
@@ -123,24 +114,32 @@
           }
         },
         {
-          "type": "shell",
+          "type": "session",
+          "style": "diamond",
+          "foreground": "p:black",
+          "background": "p:yellow",
           "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b0",
+          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} ",
+          "min_width": 80
+        },
+        {
+          "type": "shell",
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
-          "template": "in <p:yellow><b>{{ .Name }}</b></> "
+          "template": " in <p:yellow><b>{{ .Name }}</b></> "
         },
         {
           "type": "time",
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
-          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05\" }}</b></> "
+          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05  \" }}</b></> "
         },
         {
           "background": "#ffffff",
           "foreground": "#000000",
-          "leading_diamond": "\ue0b6",
           "style": "diamond",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
           "trailing_diamond": "\ue0b4",
