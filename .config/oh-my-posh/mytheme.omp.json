@@ -146,7 +146,8 @@
           "background": "p:navy",
           "powerline_symbol": "",
           "invert_powerline": true,
-          "template": " <p:yellow><b>{{ .Name }}</b></> "
+          "template": " <p:yellow><b>{{ .Name }}</b></> ",
+          "min_width": 90
         },
         {
           "type": "time",
