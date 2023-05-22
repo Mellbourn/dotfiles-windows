@@ -114,11 +114,22 @@
           }
         },
         {
+          "type": "executiontime",
+          "style": "diamond",
+          "foreground": "p:black",
+          "background": "p:yellow",
+          "leading_diamond": "<background,transparent></>",
+          "properties": {
+            "style": "round"
+          },
+          "template": " {{ .FormattedMs }}   "
+        },
+        {
           "type": "session",
           "style": "diamond",
           "foreground": "p:black",
           "background": "p:cyan",
-          "leading_diamond": "<background,transparent></>",
+          "leading_diamond": "<background,parentBackground></>",
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
           "min_width": 80
         },
