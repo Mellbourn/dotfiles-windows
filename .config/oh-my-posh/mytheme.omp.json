@@ -128,14 +128,14 @@
           "foreground": "p:white",
           "background": "p:blue",
           "leading_diamond": "<background,parentBackground></>",
-          "template": " in <p:yellow><b>{{ .Name }}</b></> "
+          "template": " <p:yellow><b>{{ .Name }}</b></> "
         },
         {
           "type": "time",
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
-          "template": "at <p:white><b>{{ .CurrentDate | date \"15:04:05  \" }}</b></> "
+          "template": "<p:white><b>{{ .CurrentDate | date \"15:04:05  \" }}</b></> "
         },
         {
           "background": "#ffffff",
