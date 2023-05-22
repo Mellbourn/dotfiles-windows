@@ -117,7 +117,7 @@
           "type": "session",
           "style": "diamond",
           "foreground": "p:black",
-          "background": "p:yellow",
+          "background": "p:cyan",
           "leading_diamond": "<background,transparent></>",
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} ",
           "min_width": 80
@@ -209,10 +209,11 @@
   "palette": {
     "black": "#262B44",
     "blue": "#0c29ce",
+    "cyan": "#79f8f8",
     "green": "#59C9A5",
     "orange": "#F07623",
     "red": "#D81E5B",
     "white": "#E0DEF4",
-    "yellow": "#F3AE35"
+    "yellow": "#fff34a"
   }
 }
