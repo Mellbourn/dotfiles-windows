@@ -146,7 +146,7 @@
           "background": "p:cyan",
           "powerline_symbol": "",
           "invert_powerline": true,
-          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "template": " {{ if .SSHSession }}\ueba9 {{ end }}<i>{{ .UserName }}@{{ .HostName }}</i> ",
           "min_width": 80
         },
         {
