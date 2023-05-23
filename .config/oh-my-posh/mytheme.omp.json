@@ -136,7 +136,7 @@
           "background": "p:orange",
           "powerline_symbol": "",
           "invert_powerline": true,
-          "template": "{{ if gt .PhysicalPercentUsed 60 }} {{ round .PhysicalPercentUsed .Precision }}%  {{ end }}{{ if gt .SwapPercentUsed 0 }} {{ round .SwapPercentUsed .Precision }}% \uebcb{{ end }} {{ if gt .Load1 0 }}{{ .Load1 }} {{ .Load5 }} {{ .Load15 }} \ueac2 {{ end }}",
+          "template": "{{ if gt .PhysicalPercentUsed 60 }} {{ round .PhysicalPercentUsed .Precision }}%  {{ end }}{{ if gt .SwapPercentUsed 0 }} {{ round .SwapPercentUsed .Precision }}% \uebcb{{ end }} {{ if gt .Load1 0 }}{{ .Load1 }} {{ .Load5 }} {{ .Load15 }} \uf063 {{ end }}",
           "min_width": 80
         },
         {
