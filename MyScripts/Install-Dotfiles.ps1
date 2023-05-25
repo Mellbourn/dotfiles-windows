@@ -26,7 +26,7 @@ Google.Chrome.Beta, VideoLAN.VLC
 # DominikReichl.KeePass
 
 # terminal
-JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, jftuga.less, sharkdp.bat
+JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, sharkdp.fd, jftuga.less, sharkdp.bat
 
 # developer
 Microsoft.VisualStudioCode, Microsoft.PowerShell
@@ -35,6 +35,7 @@ Microsoft.VisualStudioCode, Microsoft.PowerShell
 Valve.Steam
 
 "
+$wingetList = winget list | Out-String
 $InstallList = $InstallListString -split "`n"
 foreach ($InstallLineString in $InstallList) {
   $InstallLine = $InstallLineString.Trim()
@@ -42,7 +43,7 @@ foreach ($InstallLineString in $InstallList) {
     $Install = $InstallLine.Split(",")
     foreach ($InstallItem in $Install) {
       $InstallItem = $InstallItem.Trim()
-      if ($InstallItem -ne "") {
+      if ($InstallItem -ne "" -and (-Not ($wingetList -Match $InstallItem))) {
         Write-Verbose "`nInstalling '$InstallItem'"
         winget install -e --id $InstallItem
       }

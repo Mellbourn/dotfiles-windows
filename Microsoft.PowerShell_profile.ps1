@@ -5,6 +5,7 @@ $env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/MyScripts"
 # ripgrep is installed by winget, but incorrectly added to path
 $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_*\ripgrep-*-x86_64-pc-windows-msvc)
 $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\sharkdp.bat_Microsoft.Winget.Source_*\bat-v*-x86_64-pc-windows-msvc)
+$env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\sharkdp.fd_Microsoft.Winget.Source_*\fd-v*-x86_64-pc-windows-msvc)
 
 
 $env:CodeDir = "$env:USERPROFILE/code"
