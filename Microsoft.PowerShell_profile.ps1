@@ -19,6 +19,7 @@ Import-Module z
 
 oh-my-posh init pwsh --config "$PSScriptRoot/MyConfig/oh-my-posh/mytheme.omp.json" | Invoke-Expression
 
+# I love the icons like in lsd, but this is really slow, about 300ms
 Import-Module -Name Terminal-Icons
 
 Set-PSReadLineOption -EditMode Emacs
