@@ -6,6 +6,7 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
 
+Write-Verbose "`nInstalling winget packages"
 $InstallListString = "
 
 # foundational
