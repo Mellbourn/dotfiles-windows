@@ -75,6 +75,7 @@ z,PSFzf
 # this is needed only for command line completion in PSFzf
 posh-git
 "
+$GetModuleList = Get-InstalledModule | Select-Object Name
 $ModuleList = $ModuleListString -split "`n"
 foreach ($ModuleLineString in $ModuleList) {
   $ModuleLine = $ModuleLineString.Trim()
@@ -82,8 +83,8 @@ foreach ($ModuleLineString in $ModuleList) {
     $ModuleArray = $ModuleLine.Split(",")
     foreach ($ModuleWithSpace in $ModuleArray) {
       $Module = $ModuleWithSpace.Trim()
-      if ($Module -ne "") {
-        if (-Not (Get-Module $Module)) {
+      if ($Module -ne "" -and (-Not ($GetModuleList | Where-Object { $_.Name -eq $Module }))) {
+        if (-Not (Get-InstalledModule $Module)) {
           Write-Verbose "`nInstalling '$Module'"
           Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
         }
