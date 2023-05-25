@@ -58,20 +58,23 @@ if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
   sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
 }
 
+Write-Verbose "`nInstall modules"
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 if (-Not (Get-Module Terminal-Icons)) {
   Write-Verbose "`nInstalling Terminal-Icons module"
   Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
 }
+# to get Remove-ItemSafely, i.e. deletion by moving to the trash
+Install-Module -Name Recycle
+Install-Module -Name z
+Install-Module -Name PSFzf
+# this is needed only for command line completion in PSFzf
+Install-Module -Name posh-git
+
 
 # non installation configuration
 if (-Not (Test-Path -Path $env:CodeDir/private)) {
   New-Item -Type Directory -Path $env:CodeDir/private
-}
-
-if (-Not (Test-Path -Path .gitconfig)) {
-  Write-Verbose "`ngit configuration"
-  sudo New-Item -ItemType SymbolicLink -Path .gitconfig -Target $PSScriptRoot/.gitconfig
 }
 
 Write-Verbose "`nConfiguring SSH"
@@ -84,9 +87,38 @@ if ((Get-Service ssh-agent).StartType -ne "Automatic") {
 if ((Get-Service ssh-agent).Status -ne "Running") {
   Start-Service ssh-agent
 }
-if (-Not (Test-Path -Path .ssh/config)) {
-  sudo New-Item -ItemType SymbolicLink -Path .ssh/config -Target $PSScriptRoot/.ssh/config
-  ssh-add .ssh/id_ed25519
+
+Write-Verbose "`nSymbolic links"
+$LinkListString = "
+# git config
+.gitconfig
+
+# SSH Config
+.ssh\config
+
+# winget settings
+AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json
+"
+$LinkList = $LinkListString -split "`n"
+foreach ($LinkLineString in $LinkList) {
+  $LinkLine = $LinkLineString.Trim()
+  if ($LinkLine -ne "" -and $LinkLine -notlike "#*") {
+    $Link = $LinkLine.Split(",")
+    foreach ($LinkItem in $Link) {
+      $LinkItem = $LinkItem.Trim()
+      if ($LinkItem -ne "") {
+        if (Test-Path -Path $LinkItem) {
+          if ((Get-ItemProperty -Path $LinkItem -Name LinkType).LinkType -eq 'SymbolicLink') {
+            continue
+          }
+          Write-Warning "`n'$LinkItem exists but is not a link, moving to trash"
+          Remove-ItemSafely -Path $LinkItem -Force
+        }
+        Write-Verbose "`nLinking '$LinkItem'"
+        sudo New-Item -ItemType SymbolicLink -Path $LinkItem -Target $PSScriptRoot\..\HomeLinkTargets\$LinkItem
+      }
+    }
+  }
 }
 
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
@@ -99,14 +131,6 @@ else {
 }
 
 Write-Verbose "`nMiscellaneous configuration"
-
-Write-Verbose "`nInstall modules"
-# to get Remove-ItemSafely, i.e. deletion by moving to the trash
-Install-Module -Name Recycle
-Install-Module -Name z
-Install-Module -Name PSFzf
-# this is needed only for command line completion in PSFzf
-Install-Module -Name posh-git
 
 # terminal settings - couldn't get this to work, terminal recreates settings when moved?
 #$settingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
