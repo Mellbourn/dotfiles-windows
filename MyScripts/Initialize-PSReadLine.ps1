@@ -1,0 +1,90 @@
+# these are mostly copied from Scott Hanselman's gist
+# https://gist.github.com/shanselman/25f5550ad186189e0e68916c6d7f44c3?WT.mc_id=-blog-scottha
+
+# The next four key handlers are designed to make entering matched quotes
+# parens, and braces a nicer experience.  I'd like to include functions
+# in the module that do this, but this implementation still isn't as smart
+# as ReSharper, so I'm just providing it as a sample.
+
+Set-PSReadLineKeyHandler -Key '(', '{', '[' `
+    -BriefDescription InsertPairedBraces `
+    -LongDescription "Insert matching braces" `
+    -ScriptBlock {
+    param($key, $arg)
+
+    $closeChar = switch ($key.KeyChar) {
+        <#case#> '(' { [char]')'; break }
+        <#case#> '{' { [char]'}'; break }
+        <#case#> '[' { [char]']'; break }
+    }
+
+    $selectionStart = $null
+    $selectionLength = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetSelectionState([ref]$selectionStart, [ref]$selectionLength)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($selectionStart -ne -1) {
+        # Text is selected, wrap it in brackets
+        [Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $key.KeyChar + $line.SubString($selectionStart, $selectionLength) + $closeChar)
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selectionStart + $selectionLength + 2)
+    }
+    else {
+        # No text is selected, insert a pair
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)$closeChar")
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+}
+
+Set-PSReadLineKeyHandler -Key ')', ']', '}' `
+    -BriefDescription SmartCloseBraces `
+    -LongDescription "Insert closing brace or skip" `
+    -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($line[$cursor] -eq $key.KeyChar) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+    else {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)")
+    }
+}
+
+Set-PSReadLineKeyHandler -Key Backspace `
+    -BriefDescription SmartBackspace `
+    -LongDescription "Delete previous character or matching quotes/parens/braces" `
+    -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($cursor -gt 0) {
+        $toMatch = $null
+        if ($cursor -lt $line.Length) {
+            switch ($line[$cursor]) {
+                <#case#> '"' { $toMatch = '"'; break }
+                <#case#> "'" { $toMatch = "'"; break }
+                <#case#> ')' { $toMatch = '('; break }
+                <#case#> ']' { $toMatch = '['; break }
+                <#case#> '}' { $toMatch = '{'; break }
+            }
+        }
+
+        if ($toMatch -ne $null -and $line[$cursor - 1] -eq $toMatch) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor - 1, 2)
+        }
+        else {
+            [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteChar($key, $arg)
+        }
+    }
+}
+
+#endregion Smart Insert/Delete

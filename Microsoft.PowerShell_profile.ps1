@@ -36,3 +36,5 @@ $env:FZF_DEFAULT_OPTS = "--ansi --select-1 --height ~40% --reverse --tiebreak=be
 function less {
     bat --pager "less -+E $env:LESS" $args
 }
+
+Initialize-PSReadLine.ps1
