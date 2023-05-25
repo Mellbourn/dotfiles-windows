@@ -40,12 +40,12 @@ $InstallList = $InstallListString -split "`n"
 foreach ($InstallLineString in $InstallList) {
   $InstallLine = $InstallLineString.Trim()
   if ($InstallLine -ne "" -and $InstallLine -notlike "#*") {
-    $Install = $InstallLine.Split(",")
-    foreach ($InstallItem in $Install) {
-      $InstallItem = $InstallItem.Trim()
-      if ($InstallItem -ne "" -and (-Not ($wingetList -Match $InstallItem))) {
-        Write-Verbose "`nInstalling '$InstallItem'"
-        winget install -e --id $InstallItem
+    $InstallArray = $InstallLine.Split(",")
+    foreach ($InstallWithSpace in $InstallArray) {
+      $Install = $InstallWithSpace.Trim()
+      if ($Install -ne "" -and (-Not ($wingetList -Match $Install))) {
+        Write-Verbose "`nInstalling '$Install'"
+        winget install -e --id $Install
       }
     }
   }
@@ -58,18 +58,39 @@ if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
   sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
 }
 
-Write-Verbose "`nInstall modules"
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-if (-Not (Get-Module Terminal-Icons)) {
-  Write-Verbose "`nInstalling Terminal-Icons module"
-  Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
+if ((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') {
+  Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 }
-# to get Remove-ItemSafely, i.e. deletion by moving to the trash
-Install-Module -Name Recycle
-Install-Module -Name z
-Install-Module -Name PSFzf
+Write-Verbose "`nInstall modules"
+$ModuleListString = "
+# Remove-ItemSafely, i.e. deletion by moving to the trash
+Recycle
+
+# add icons to ls, like lsd
+Terminal-Icons
+
+# unix-like environment
+z,PSFzf
+
 # this is needed only for command line completion in PSFzf
-Install-Module -Name posh-git
+posh-git
+"
+$ModuleList = $ModuleListString -split "`n"
+foreach ($ModuleLineString in $ModuleList) {
+  $ModuleLine = $ModuleLineString.Trim()
+  if ($ModuleLine -ne "" -and $ModuleLine -notlike "#*") {
+    $ModuleArray = $ModuleLine.Split(",")
+    foreach ($ModuleWithSpace in $ModuleArray) {
+      $Module = $ModuleWithSpace.Trim()
+      if ($Module -ne "") {
+        if (-Not (Get-Module $Module)) {
+          Write-Verbose "`nInstalling '$Module'"
+          Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
+        }
+      }
+    }
+  }
+}
 
 
 # non installation configuration
@@ -103,19 +124,19 @@ $LinkList = $LinkListString -split "`n"
 foreach ($LinkLineString in $LinkList) {
   $LinkLine = $LinkLineString.Trim()
   if ($LinkLine -ne "" -and $LinkLine -notlike "#*") {
-    $Link = $LinkLine.Split(",")
-    foreach ($LinkItem in $Link) {
-      $LinkItem = $LinkItem.Trim()
-      if ($LinkItem -ne "") {
-        if (Test-Path -Path $LinkItem) {
-          if ((Get-ItemProperty -Path $LinkItem -Name LinkType).LinkType -eq 'SymbolicLink') {
+    $LinkArray = $LinkLine.Split(",")
+    foreach ($LinkItem in $LinkArray) {
+      $Link = $LinkItem.Trim()
+      if ($Link -ne "") {
+        if (Test-Path -Path $Link) {
+          if ((Get-ItemProperty -Path $Link -Name LinkType).LinkType -eq 'SymbolicLink') {
             continue
           }
-          Write-Warning "`n'$LinkItem exists but is not a link, moving to trash"
-          Remove-ItemSafely -Path $LinkItem -Force
+          Write-Warning "`n'$Link exists but is not a link, moving to trash"
+          Remove-ItemSafely -Path $Link -Force
         }
-        Write-Verbose "`nLinking '$LinkItem'"
-        sudo New-Item -ItemType SymbolicLink -Path $LinkItem -Target $PSScriptRoot\..\HomeLinkTargets\$LinkItem
+        Write-Verbose "`nLinking '$Link'"
+        sudo New-Item -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
       }
     }
   }
