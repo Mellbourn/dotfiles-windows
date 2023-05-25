@@ -155,6 +155,8 @@ else {
 
 Write-Verbose "`nMiscellaneous configuration"
 
+z -clean
+
 # terminal settings - couldn't get this to work, terminal recreates settings when moved?
 #$settingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 #if (-Not (Get-ChildItem $settingsPath).LinkType) {
