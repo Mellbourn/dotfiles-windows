@@ -148,6 +148,18 @@ foreach ($LinkLineString in $LinkList) {
   }
 }
 
+Write-Verbose "`nConfigure Windows Terminal"
+Push-Location AppData\Local\Packages\Microsoft.WindowsTerminal_*\LocalState
+if (-Not (Test-Path -Path .git)) {
+  Copy-Item settings.json -destination settings.backup.$(get-date -UFormat "%Y%m%dT%H%M%S").json
+  git clone git@github.com:Mellbourn/WindowsTerminal-LocalState.git
+  Move-Item WindowsTerminal-LocalState/.git .
+  Remove-ItemSafely -Path WindowsTerminal-LocalState
+  git reset --hard
+}
+git pull
+Pop-Location
+
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
   Write-Verbose "`nWSL update"
   wsl --update
