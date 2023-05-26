@@ -52,6 +52,10 @@ foreach ($InstallLineString in $InstallList) {
   }
 }
 
+if (-Not (Test-Path -Path bin)) {
+  New-Item -Type Directory -Path bin
+}
+
 $gitCryptPattern = "git-crypt-*-x86_64.exe"
 if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
   Write-Verbose "`nInstalling git-crypt"
