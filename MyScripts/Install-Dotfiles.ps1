@@ -46,7 +46,7 @@ foreach ($InstallLineString in $InstallList) {
       $Install = $InstallWithSpace.Trim()
       if ($Install -ne "" -and (-Not ($wingetList -Match $Install))) {
         Write-Verbose "`nInstalling '$Install'"
-        winget install -e --id $Install
+        winget install --accept-package-agreements --accept-source-agreements -e --id $Install
       }
     }
   }
