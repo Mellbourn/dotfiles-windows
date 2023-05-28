@@ -6,6 +6,12 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
 
+Write-Verbose "`nMake dotfiles always available on this device"
+# Modules contain hidden xml files that will be skipped by default
+attrib +p -h $PSScriptRoot\..\Modules\*.xml /s
+attrib +p -h $PSScriptRoot\..\windows-terminal-icons\.git
+attrib +p $PSScriptRoot\..\*.* /s
+
 Write-Verbose "`nInstalling winget packages"
 $InstallListString = "
 
