@@ -95,7 +95,7 @@ foreach ($ModuleLineString in $ModuleList) {
     foreach ($ModuleWithSpace in $ModuleArray) {
       $Module = $ModuleWithSpace.Trim()
       if ($Module -ne "" -and (-Not ($GetModuleList | Where-Object { $_.Name -eq $Module }))) {
-        if (-Not ((Get-InstalledModule $Module 2> $null) -or (Get-Module $Module))) {
+        if (-Not ((Get-InstalledModule -ErrorAction:SilentlyContinue $Module) -or (Get-Module $Module))) {
           Write-Verbose "`nInstalling '$Module'"
           Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
         }
