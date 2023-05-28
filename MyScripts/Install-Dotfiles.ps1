@@ -131,6 +131,9 @@ $LinkListString = "
 
 # winget settings
 AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json
+
+# Terminal settings
+AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 "
 $LinkList = $LinkListString -split "`n"
 foreach ($LinkLineString in $LinkList) {
@@ -144,27 +147,15 @@ foreach ($LinkLineString in $LinkList) {
           if ((Get-ItemProperty -Path $Link -Name LinkType).LinkType -eq 'SymbolicLink') {
             continue
           }
-          Write-Warning "`n'$Link exists but is not a link, moving to trash"
-          Remove-ItemSafely -Path $Link -Force
+          Write-Warning "`n'$Link exists but is not a link, creating backup"
+          Copy-Item -Path $Link -Destination "$Link.$(Get-Date -UFormat "%Y%m%dT%H%M%S").bak"
         }
         Write-Verbose "`nLinking '$Link'"
-        sudo New-Item -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
+        sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
       }
     }
   }
 }
-
-Write-Verbose "`nConfigure Windows Terminal"
-Push-Location AppData\Local\Packages\Microsoft.WindowsTerminal_*\LocalState
-if (-Not (Test-Path -Path .git)) {
-  Copy-Item settings.json -destination settings.backup.$(get-date -UFormat "%Y%m%dT%H%M%S").json
-  git clone git@github.com:Mellbourn/WindowsTerminal-LocalState.git
-  Move-Item WindowsTerminal-LocalState/.git .
-  Remove-ItemSafely -Path WindowsTerminal-LocalState
-  git reset --hard
-}
-git pull
-Pop-Location
 
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
   Write-Verbose "`nWSL update"
@@ -178,13 +169,6 @@ else {
 Write-Verbose "`nMiscellaneous configuration"
 
 z -clean
-
-# terminal settings - couldn't get this to work, terminal recreates settings when moved?
-#$settingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-#if (-Not (Get-ChildItem $settingsPath).LinkType) {
-#  Move-Item $settingsPath "$settingsPath.bak"
-#  sudo New-Item -ItemType SymbolicLink -Path $settingsPath -Target $env:USERPROFILE/code/dotfiles-windows/terminal/settings.json
-#}
 
 Write-Verbose "`nInstalling fonts"
 Push-Location $env:CodeDir/private
