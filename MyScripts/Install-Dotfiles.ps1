@@ -86,7 +86,8 @@ z,PSFzf
 # this is needed only for command line completion in PSFzf
 posh-git
 "
-$GetModuleList = Get-InstalledModule | Select-Object Name
+# Weirdly, listing the modules is more reliable than Get-Module or Get-InstalledModule
+$GetModuleList = (Get-ChildItem $PSScriptRoot\..\Modules).Name
 $ModuleList = $ModuleListString -split "`n"
 foreach ($ModuleLineString in $ModuleList) {
   $ModuleLine = $ModuleLineString.Trim()
@@ -94,11 +95,9 @@ foreach ($ModuleLineString in $ModuleList) {
     $ModuleArray = $ModuleLine.Split(",")
     foreach ($ModuleWithSpace in $ModuleArray) {
       $Module = $ModuleWithSpace.Trim()
-      if ($Module -ne "" -and (-Not ($GetModuleList | Where-Object { $_.Name -eq $Module }))) {
-        if (-Not ((Get-InstalledModule -ErrorAction:SilentlyContinue $Module) -or (Get-Module $Module))) {
-          Write-Verbose "`nInstalling '$Module'"
-          Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
-        }
+      if ($Module -ne "" -and (-Not ($GetModuleList.Contains($Module)))) {
+        Write-Verbose "`nInstalling '$Module'"
+        Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
       }
     }
   }
