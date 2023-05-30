@@ -39,7 +39,7 @@ JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, 
 Microsoft.VisualStudioCode, Microsoft.PowerShell
 
 # games
-Valve.Steam
+Valve.Steam, Discord.Discord
 
 "
 $wingetList = winget list | Out-String
