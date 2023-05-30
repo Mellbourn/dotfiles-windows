@@ -22,6 +22,12 @@ function yb {
     Install-Dotfiles -Verbose
 }
 
+function Clear-OldFiles($Path = "$env:OneDrive\Bilder\Screenshots", $Days = 14) {
+    Get-ChildItem -Path $Path -Recurse -Force
+    | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$Days) }
+    | Remove-Item
+}
+
 Import-Module z
 
 oh-my-posh init pwsh --config "$PSScriptRoot/MyConfig/oh-my-posh/mytheme.omp.json" | Invoke-Expression

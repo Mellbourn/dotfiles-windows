@@ -191,6 +191,9 @@ for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
 Pop-Location
 Pop-Location
 
+Write-Verbose "`nClean old files:"
+Clear-OldFiles
+
 Write-Verbose "`nUpgrading all powershell modules:"
 Update-Module
 
