@@ -1,8 +1,6 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
-Push-Location $env:USERPROFILE
-
 if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
@@ -15,15 +13,15 @@ attrib +p $PSScriptRoot\..\*.* /s
 
 Install-WingetPackages @args
 
-if (-Not (Test-Path -Path bin)) {
-  New-Item -Type Directory -Path bin
+if (-Not (Test-Path -Path $env:USERPROFILE/bin)) {
+  New-Item -Type Directory -Path $env:USERPROFILE/bin
 }
 
 $gitCryptPattern = "git-crypt-*-x86_64.exe"
-if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
+if (-Not (Test-Path -Path $env:USERPROFILE/bin/$gitCryptPattern)) {
   Write-Verbose "Installing git-crypt"
   Install-LatestRelease -repoName AGWA/git-crypt -assetPattern $gitCryptPattern
-  sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
+  sudo New-Item -ItemType SymbolicLink -Path $env:USERPROFILE/bin/git-crypt.exe -Target bin/$gitCryptPattern
 }
 
 Install-Modules @args
@@ -34,7 +32,7 @@ if (-Not (Test-Path -Path $env:CodeDir/private)) {
 }
 
 Write-Verbose "Configuring SSH"
-if (-Not (Test-Path -Path .ssh)) {
+if (-Not (Test-Path -Path $env:USERPROFILE/.ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
 }
 if ((Get-Service ssh-agent).StartType -ne "Automatic") {
@@ -91,5 +89,3 @@ Update-Module
 
 Write-Verbose "Upgrading everything installed with winget:"
 winget upgrade --all
-
-Pop-Location
