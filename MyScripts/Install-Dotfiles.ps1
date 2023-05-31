@@ -26,14 +26,7 @@ Initialize-SSH @args
 
 Install-SymbolicLinks @args
 
-if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
-  Write-Verbose "WSL update"
-  wsl --update
-}
-else {
-  Write-Verbose "WSL install"
-  wsl --install -d Ubuntu
-}
+Install-WSL @args
 
 Write-Verbose "Miscellaneous configuration"
 
