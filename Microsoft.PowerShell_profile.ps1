@@ -26,7 +26,7 @@ function yb {
 function Clear-OldFiles($Path = "$env:OneDrive\Bilder\Screenshots", $Days = 14) {
     Get-ChildItem -Path $Path -Recurse -Force
     | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$Days) }
-    | Remove-Item
+    | Remove-ItemSafely
 }
 
 Import-Module z
