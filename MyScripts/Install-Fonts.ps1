@@ -11,7 +11,7 @@ $InstallFontsString = "JetBrainsMono, CascadiaCode"
 $FontsAliasString = "JetBrainsMono, CaskaydiaCove"
 $InstallFontsList = $InstallFontsString -split ", "
 $FontsAliasList = $FontsAliasString -split ", "
-[System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+Add-Type -AssemblyName System.Drawing
 for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
   $InstallFont = $InstallFontsList[$i]
   $FontAlias = $FontsAliasList[$i]
