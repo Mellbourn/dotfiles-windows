@@ -11,6 +11,7 @@ $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\sha
 $env:CodeDir = "$env:USERPROFILE/code"
 
 Set-Alias g git
+Set-Alias trash Remove-ItemSafely
 function .. { Set-Location .. }
 function Get-LastSleep($Count = 5) {
     Get-EventLog -LogName System -Source Microsoft-Windows-Power-Troubleshooter
