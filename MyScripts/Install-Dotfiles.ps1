@@ -44,41 +44,7 @@ if ((Get-Service ssh-agent).Status -ne "Running") {
   Start-Service ssh-agent
 }
 
-Write-Verbose "Symbolic links"
-$LinkListString = "
-# git config
-.gitconfig
-
-# SSH Config
-.ssh\config
-
-# winget settings
-AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json
-
-# Terminal settings
-AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-"
-$LinkList = $LinkListString -split "`n"
-foreach ($LinkLineString in $LinkList) {
-  $LinkLine = $LinkLineString.Trim()
-  if ($LinkLine -ne "" -and $LinkLine -notlike "#*") {
-    $LinkArray = $LinkLine.Split(",")
-    foreach ($LinkItem in $LinkArray) {
-      $Link = $LinkItem.Trim()
-      if ($Link -ne "") {
-        if (Test-Path -Path $Link) {
-          if ((Get-ItemProperty -Path $Link -Name LinkType).LinkType -eq 'SymbolicLink') {
-            continue
-          }
-          Write-Warning "`n'$Link exists but is not a link, creating backup"
-          Copy-Item -Path $Link -Destination "$Link.$(Get-Date -UFormat "%Y%m%dT%H%M%S").bak"
-        }
-        Write-Verbose "Linking '$Link'"
-        sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
-      }
-    }
-  }
-}
+Install-SymbolicLinks @args
 
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
   Write-Verbose "WSL update"
