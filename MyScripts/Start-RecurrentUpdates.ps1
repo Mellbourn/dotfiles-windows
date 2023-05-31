@@ -1,12 +1,13 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
-$commandLastRunFile = "$env:LOCALAPPDATA\RecurrentCommandLastRun.txt"
+Write-Verbose "Regularly run some programs that can offer updates:"
 
+$commandLastRunFile = "$env:LOCALAPPDATA\RecurrentCommandLastRun.txt"
 $currentDate = Get-Date
 
 function Invoke-RecurrentCommands {
-    Write-Verbose "Running command..."
+    Write-Verbose "Running programs..."
     ArmouryCrate.exe
     Start-Process -FilePath "$env:ProgramFiles\Kingston_SSD_Manager\KSM_Gen15.exe"
     Start-Process "$env:ProgramFiles\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe"
@@ -22,13 +23,12 @@ if (Test-Path $commandLastRunFile) {
 
     if ($daysSinceLastRun -ge 30) {
         Invoke-RecurrentCommands
+        return
     }
-    else {
-        Write-Verbose "Command was last run $daysSinceLastRun days ago. Waiting until 30 days have passed."
-    }
+    Write-Verbose "Programs were last run $daysSinceLastRun days ago. Waiting until 30 days have passed."
     return
 }
 
-Write-Verbose "Running command for the first time..."
+Write-Verbose "Running for the first time"
 
 Invoke-RecurrentCommands
