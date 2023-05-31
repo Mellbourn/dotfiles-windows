@@ -9,13 +9,13 @@ if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
 
-Write-Verbose "`nMake dotfiles always available on this device"
+Write-Verbose "Make dotfiles always available on this device"
 # Modules contain hidden xml files that will be skipped by default
 attrib +p -h $PSScriptRoot\..\Modules\*.xml /s
 attrib +p -h $PSScriptRoot\..\windows-terminal-icons\.git
 attrib +p $PSScriptRoot\..\*.* /s
 
-Write-Verbose "`nInstalling winget packages"
+Write-Verbose "Installing winget packages"
 $InstallListString = "
 
 # foundational
@@ -54,7 +54,7 @@ foreach ($InstallLineString in $InstallList) {
     foreach ($InstallWithSpace in $InstallArray) {
       $Install = $InstallWithSpace.Trim()
       if ($Install -ne "" -and (-Not ($wingetList -Match $Install))) {
-        Write-Verbose "`nInstalling '$Install'"
+        Write-Verbose "Installing '$Install'"
         winget install --accept-package-agreements --accept-source-agreements -e --id $Install
       }
     }
@@ -67,7 +67,7 @@ if (-Not (Test-Path -Path bin)) {
 
 $gitCryptPattern = "git-crypt-*-x86_64.exe"
 if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
-  Write-Verbose "`nInstalling git-crypt"
+  Write-Verbose "Installing git-crypt"
   Install-LatestRelease -repoName AGWA/git-crypt -assetPattern $gitCryptPattern
   sudo New-Item -ItemType SymbolicLink -Path bin/git-crypt.exe -Target bin/$gitCryptPattern
 }
@@ -75,7 +75,7 @@ if (-Not (Test-Path -Path bin/$gitCryptPattern)) {
 if ((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') {
   Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 }
-Write-Verbose "`nInstall modules"
+Write-Verbose "Install modules"
 $ModuleListString = "
 # Remove-ItemSafely, i.e. deletion by moving to the trash
 Recycle
@@ -99,7 +99,7 @@ foreach ($ModuleLineString in $ModuleList) {
     foreach ($ModuleWithSpace in $ModuleArray) {
       $Module = $ModuleWithSpace.Trim()
       if ($Module -ne "" -and (-Not ($GetModuleList.Contains($Module)))) {
-        Write-Verbose "`nInstalling '$Module'"
+        Write-Verbose "Installing '$Module'"
         Install-Module -Name $Module -Repository PSGallery -Scope CurrentUser
       }
     }
@@ -112,7 +112,7 @@ if (-Not (Test-Path -Path $env:CodeDir/private)) {
   New-Item -Type Directory -Path $env:CodeDir/private
 }
 
-Write-Verbose "`nConfiguring SSH"
+Write-Verbose "Configuring SSH"
 if (-Not (Test-Path -Path .ssh)) {
   ssh-keygen -t ed25519 -C "klas@mellbourn.net"
 }
@@ -123,7 +123,7 @@ if ((Get-Service ssh-agent).Status -ne "Running") {
   Start-Service ssh-agent
 }
 
-Write-Verbose "`nSymbolic links"
+Write-Verbose "Symbolic links"
 $LinkListString = "
 # git config
 .gitconfig
@@ -152,7 +152,7 @@ foreach ($LinkLineString in $LinkList) {
           Write-Warning "`n'$Link exists but is not a link, creating backup"
           Copy-Item -Path $Link -Destination "$Link.$(Get-Date -UFormat "%Y%m%dT%H%M%S").bak"
         }
-        Write-Verbose "`nLinking '$Link'"
+        Write-Verbose "Linking '$Link'"
         sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
       }
     }
@@ -160,19 +160,19 @@ foreach ($LinkLineString in $LinkList) {
 }
 
 if (wsl -l | Where-Object { $_.Replace("`0", "") -match '^Ubuntu' }) {
-  Write-Verbose "`nWSL update"
+  Write-Verbose "WSL update"
   wsl --update
 }
 else {
-  Write-Verbose "`nWSL install"
+  Write-Verbose "WSL install"
   wsl --install -d Ubuntu
 }
 
-Write-Verbose "`nMiscellaneous configuration"
+Write-Verbose "Miscellaneous configuration"
 
 z -clean
 
-Write-Verbose "`nInstalling fonts"
+Write-Verbose "Installing fonts"
 Push-Location $env:CodeDir/private
 if (-Not (Test-Path -Path nerd-fonts)) {
   git clone --filter=blob:none --depth=1 --single-branch git@github.com:ryanoasis/nerd-fonts
@@ -187,22 +187,22 @@ for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
   $InstallFont = $InstallFontsList[$i]
   $FontAlias = $FontsAliasList[$i]
   if (-Not ((New-Object System.Drawing.Text.InstalledFontCollection).Families | Select-String $FontAlias)) {
-    Write-Verbose "`nInstalling '$FontAlias'"
+    Write-Verbose "Installing '$FontAlias'"
     .\install.ps1 $InstallFont
   }
 }
 Pop-Location
 Pop-Location
 
-Write-Verbose "`nClean old files:"
+Write-Verbose "Clean old files:"
 Clear-OldFiles
 
 Start-RecurrentUpdates -Verbose:$Verbose
 
-Write-Verbose "`nUpgrading all powershell modules:"
+Write-Verbose "Upgrading all powershell modules:"
 Update-Module
 
-Write-Verbose "`nUpgrading everything installed with winget:"
+Write-Verbose "Upgrading everything installed with winget:"
 winget upgrade --all
 
 Pop-Location
