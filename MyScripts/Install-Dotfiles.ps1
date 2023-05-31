@@ -1,8 +1,6 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
-$Verbose = $PSBoundParameters['Verbose'] -or $VerbosePreference -eq 'Continue'
-
 Push-Location $env:USERPROFILE
 
 if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
@@ -195,9 +193,9 @@ Pop-Location
 Pop-Location
 
 Write-Verbose "Clean old files:"
-Clear-OldFiles
+Clear-OldFiles @args
 
-Start-RecurrentUpdates -Verbose:$Verbose
+Start-RecurrentUpdates @args
 
 Write-Verbose "Upgrading all powershell modules:"
 Update-Module
