@@ -1,5 +1,6 @@
 [CmdletBinding()] param (
      [Parameter()]
+     [ValidateRange("NonNegative")]
      [int]$maxAge = 20
 )
 $ErrorActionPreference = "Stop"
