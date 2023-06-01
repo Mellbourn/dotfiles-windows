@@ -13,13 +13,6 @@ $env:CodeDir = "$env:USERPROFILE/code"
 Set-Alias g git
 Set-Alias trash Remove-ItemSafely
 function .. { Set-Location .. }
-function Get-LastSleep($Count = 5) {
-    Get-EventLog -LogName System -Source Microsoft-Windows-Power-Troubleshooter
-    | Where-Object { $_.InstanceId -eq 1 }
-    | Select-Object -First $Count
-    | Select-Object @{name = 'Time'; expression = { Get-Date $_.TimeGenerated } }, @{name = 'Message'; expression = { $_.Message.subString(0, $_.Message.IndexOf('Wake Source')) } }
-    | Format-Table -AutoSize -Wrap
-}
 function yb {
     Install-Dotfiles -Verbose
 }

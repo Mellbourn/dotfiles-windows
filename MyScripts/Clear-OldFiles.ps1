@@ -5,10 +5,10 @@
 
      [Parameter()]
      [ValidateRange("NonNegative")]
-     [int]$daysOld = 14
+     [int]$DaysOld = 14
 )
 $ErrorActionPreference = "Stop"
 
 Get-ChildItem -Path $Path -Recurse -Force
-    | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$daysOld) }
+    | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysOld) }
     | Remove-ItemSafely
