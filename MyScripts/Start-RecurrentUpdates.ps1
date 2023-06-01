@@ -1,4 +1,7 @@
-[CmdletBinding()] param ()
+[CmdletBinding()] param (
+     [Parameter()]
+     [int]$maxAge = 20
+)
 $ErrorActionPreference = "Stop"
 
 Write-Verbose "Regularly run some programs that can offer updates:"
@@ -21,11 +24,11 @@ if (Test-Path $commandLastRunFile) {
 
     $daysSinceLastRun = ($currentDate - $lastRunDate).Days
 
-    if ($daysSinceLastRun -ge 30) {
+    if ($daysSinceLastRun -ge $maxAge) {
         Invoke-RecurrentCommands
         return
     }
-    Write-Verbose "Programs were last run $daysSinceLastRun days ago. Waiting until 30 days have passed."
+    Write-Verbose "Programs were last run $daysSinceLastRun days ago. Waiting until $maxAge days have passed."
     return
 }
 
