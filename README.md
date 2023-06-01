@@ -1,6 +1,6 @@
 # dotfiles-windows
 
-My windows dotfiles. Sets up my environment.
+My Windows dotfiles. Sets up my environment.
 
 ## Installation
 
@@ -11,4 +11,4 @@ My windows dotfiles. Sets up my environment.
 
 ## Details
 
-The folder `HomeLinkTargets` contains files that will be linked to from other places below the user home directory. The folder structure below `HomeLinkTargets` mirrors the structure of the user home directory.
+The folder `HomeLinkTargets` contains files that will be linked to from other places below the home directory. The folder structure below `HomeLinkTargets` mirrors the structure of the user home directory.
