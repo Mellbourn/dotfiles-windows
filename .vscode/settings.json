@@ -18,5 +18,6 @@
     "titleBar.inactiveBackground": "#c60a4999",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#c60a49"
+  "peacock.color": "#c60a49",
+  "cSpell.words": ["Dokument", "USERPROFILE"]
 }
