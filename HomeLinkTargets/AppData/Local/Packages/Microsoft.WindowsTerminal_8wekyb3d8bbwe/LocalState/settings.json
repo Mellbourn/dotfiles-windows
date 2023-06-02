@@ -1,10 +1,10 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -20,7 +20,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -36,27 +36,27 @@
     "firstWindowPreference": "persistedWindowLayout",
     "initialCols": 155,
     "initialRows": 43,
-    "profiles":
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
             "adjustIndistinguishableColors": "always",
             "antialiasingMode": "grayscale",
-            "bellStyle":
+            "bellStyle": 
             [
                 "audible",
                 "window",
                 "taskbar"
             ],
             "cursorShape": "emptyBox",
-            "font":
+            "font": 
             {
                 "face": "CaskaydiaCove Nerd Font",
                 "size": 10.0
             },
             "useAtlasEngine": false
         },
-        "list":
+        "list": 
         [
             {
                 "colorScheme": "Campbell Powershell",
@@ -107,7 +107,7 @@
             },
             {
                 "colorScheme": "Dracula PRO - Lincoln",
-                "commandline": "ssh raspberrypi4docker",
+                "commandline": "ssh 192.168.211.11",
                 "guid": "{4f4d9e15-12cd-40f9-b2a1-18ae553c45cf}",
                 "hidden": false,
                 "icon": "C:\\Users\\Klas\\OneDrive\\Dokument\\PowerShell\\windows-terminal-icons\\icons\\raspberry.png",
@@ -162,7 +162,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
