@@ -1,7 +1,10 @@
 [CmdletBinding()] param (
      [Parameter()]
      [ValidateRange("NonNegative")]
-     [int]$maxAge = 20
+     [int]$MaxAge = 20,
+
+     [Parameter()]
+     [switch]$Force
 )
 $ErrorActionPreference = "Stop"
 
@@ -20,17 +23,22 @@ function Invoke-RecurrentCommands {
     $currentDate | Set-Content $commandLastRunFile
 }
 
+if ($Force) {
+    Invoke-RecurrentCommands
+    return
+}
+
 if (Test-Path $commandLastRunFile) {
     $lastRunDateStr = Get-Content $commandLastRunFile | Out-String
     $lastRunDate = [DateTime]::Parse($lastRunDateStr)
 
     $daysSinceLastRun = ($currentDate - $lastRunDate).Days
 
-    if ($daysSinceLastRun -ge $maxAge) {
+    if ($daysSinceLastRun -ge $MaxAge) {
         Invoke-RecurrentCommands
         return
     }
-    Write-Verbose "Programs were last run $daysSinceLastRun days ago. Waiting until $maxAge days have passed."
+    Write-Verbose "Programs were last run $daysSinceLastRun days ago. Waiting until $MaxAge days have passed."
     return
 }
 
