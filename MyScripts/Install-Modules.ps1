@@ -6,6 +6,8 @@ if ((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') {
 }
 Write-Verbose "Install modules"
 $ModuleListString = "
+PSWindowsUpdate
+
 # Remove-ItemSafely, i.e. deletion by moving to the trash
 Recycle
 
