@@ -1,12 +1,13 @@
 [CmdletBinding()] param (
-     [Parameter()]
-     [ValidateRange("NonNegative")]
-     [int]$MaxAge = 20,
+    [Parameter()]
+    [ValidateRange("NonNegative")]
+    [int]$MaxAge = 20,
 
-     [Parameter()]
-     [switch]$Force
+    [Parameter()]
+    [switch]$Force
 )
 $ErrorActionPreference = "Stop"
+$Verbose = $PSBoundParameters['Verbose'] -or $VerbosePreference -eq 'Continue'
 
 Write-Verbose "Regularly run some programs that can offer updates:"
 
@@ -18,6 +19,14 @@ function Invoke-RecurrentCommands {
     ArmouryCrate.exe
     Start-Process -FilePath "$env:ProgramFiles\Kingston_SSD_Manager\KSM_Gen15.exe"
     Start-Process "$env:ProgramFiles\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe"
+
+    Write-Verbose "Installing windows updates:"
+    if ($Verbose) {
+        sudo Get-WindowsUpdate -AcceptAll -Install -AutoReboot -Verbose
+    }
+    else {
+        sudo Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+    }
     Start-Process "ms-settings:windowsupdate-optionalupdates"
 
     $currentDate | Set-Content $commandLastRunFile
