@@ -36,6 +36,12 @@
     "firstWindowPreference": "persistedWindowLayout",
     "initialCols": 155,
     "initialRows": 43,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
