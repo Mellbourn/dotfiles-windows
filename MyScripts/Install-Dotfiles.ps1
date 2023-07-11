@@ -37,10 +37,10 @@ Install-Fonts @args
 Write-Verbose "Clean old files:"
 Clear-OldFiles @args
 
-Start-RecurrentUpdates @args
-
 Write-Verbose "Upgrading all powershell modules:"
 Update-Module
 
 Write-Verbose "Upgrading everything installed with winget:"
 winget upgrade --all
+
+Start-RecurrentUpdates @args
