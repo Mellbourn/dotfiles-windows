@@ -1,7 +1,7 @@
 [CmdletBinding()] param (
     [Parameter()]
     [ValidateRange("NonNegative")]
-    [int]$MaxAge = 20,
+    [int]$MaxAge = 10,
 
     [Parameter()]
     [switch]$Force
