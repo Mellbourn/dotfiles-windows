@@ -32,7 +32,8 @@ JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, 
 Microsoft.VisualStudioCode, Microsoft.PowerShell
 
 # games
-Valve.Steam, Discord.Discord
+Valve.Steam
+# Discord.Discord kept starting up at startup
 
 "
 $wingetList = winget list | Out-String
