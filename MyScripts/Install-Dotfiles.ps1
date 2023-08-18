@@ -1,6 +1,10 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
+if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
+  git -C $PSScriptRoot pull
+}
+
 if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
   gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
 }
@@ -44,3 +48,7 @@ Write-Verbose "Upgrading everything installed with winget:"
 winget upgrade --all
 
 Start-RecurrentUpdates @args
+
+if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
+  git -C $PSScriptRoot push
+}
