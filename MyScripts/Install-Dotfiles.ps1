@@ -1,6 +1,8 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
+Start-Transcript -Append -Path $env:LOCALAPPDATA\Install-Dotfiles.log
+
 if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
   git -C $PSScriptRoot pull
 }
@@ -52,3 +54,5 @@ Start-RecurrentUpdates @args
 if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
   git -C $PSScriptRoot push
 }
+
+Stop-Transcript
