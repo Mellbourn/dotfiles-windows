@@ -1,7 +1,12 @@
 [CmdletBinding()] param ()
 $ErrorActionPreference = "Stop"
 
-Start-Transcript -Append -Path $env:LOCALAPPDATA\Install-Dotfiles.log
+$DotfilesOutputDir = "$env:LOCALAPPDATA/Dotfiles"
+if (-Not (Test-Path -Path $DotfilesOutputDir)) {
+  New-Item -Type Directory -Path $DotfilesOutputDir/logs
+}
+
+Start-Transcript -Append -IncludeInvocationHeader -OutputDirectory $DotfilesOutputDir/logs
 
 if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
   git -C $PSScriptRoot pull
@@ -49,7 +54,7 @@ Update-Module
 Write-Verbose "Upgrading everything installed with winget:"
 winget upgrade --all
 
-Start-RecurrentUpdates @args
+Start-RecurrentUpdates @args -DotfilesOutputDir $DotfilesOutputDir
 
 if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
   git -C $PSScriptRoot push

@@ -4,14 +4,17 @@
     [int]$MaxAge = 10,
 
     [Parameter()]
-    [switch]$Force
+    [switch]$Force,
+
+    [Parameter()]
+    [string]$DotfilesOutputDir = "$env:LOCALAPPDATA/Dotfiles"
 )
 $ErrorActionPreference = "Stop"
 $Verbose = $PSBoundParameters['Verbose'] -or $VerbosePreference -eq 'Continue'
 
 Write-Verbose "Regularly run some programs that can offer updates:"
 
-$commandLastRunFile = "$env:LOCALAPPDATA\RecurrentCommandLastRun.txt"
+$commandLastRunFile = "$DotfilesOutputDir\RecurrentCommandLastRun.txt"
 $currentDate = Get-Date
 
 function Invoke-RecurrentCommands {
