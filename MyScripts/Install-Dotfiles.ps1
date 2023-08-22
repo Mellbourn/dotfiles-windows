@@ -6,7 +6,8 @@ if (-Not (Test-Path -Path $DotfilesOutputDir)) {
   New-Item -Type Directory -Path $DotfilesOutputDir/logs
 }
 
-Start-Transcript -Append -IncludeInvocationHeader -OutputDirectory $DotfilesOutputDir/logs
+$filename = (Get-DAte).ToString("yyyyMMddTHHmmss") + ".txt"
+Start-Transcript -Append -IncludeInvocationHeader -Path $DotfilesOutputDir/logs/$filename
 
 if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
   git -C $PSScriptRoot pull
@@ -56,8 +57,6 @@ winget upgrade --all
 
 Start-RecurrentUpdates @args -DotfilesOutputDir $DotfilesOutputDir
 
-if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
-  git -C $PSScriptRoot push
-}
+git -C $PSScriptRoot push
 
 Stop-Transcript
