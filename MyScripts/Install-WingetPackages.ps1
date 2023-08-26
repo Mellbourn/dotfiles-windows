@@ -17,6 +17,8 @@ Nvidia.GeForceExperience
 9N7F2SM5D1LR
 # Windows Scanner
 9WZDNCRFJ3PV
+# Dymo label printer
+SanfordLP.DYMOConnect
 
 # security
 Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateInternetAccess
