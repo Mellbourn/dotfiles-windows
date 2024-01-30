@@ -18,7 +18,7 @@ Set-Alias g git
 Set-Alias trash Remove-ItemSafely
 function .. { Set-Location .. }
 function yb {
-    Install-Dotfiles -Verbose
+    Install-Dotfiles -Verbose | Tee-Object -FilePath "$env:LOCALAPPDATA/Dotfiles/logs/install_log.txt" -Append
 }
 function less {
     bat --pager "less -+E $env:LESS" $args
