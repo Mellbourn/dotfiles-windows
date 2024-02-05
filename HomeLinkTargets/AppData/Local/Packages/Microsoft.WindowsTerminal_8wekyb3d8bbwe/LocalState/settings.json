@@ -65,6 +65,7 @@
         "list": 
         [
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Campbell Powershell",
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "elevate": false,
@@ -73,6 +74,7 @@
                 "name": "Windows PowerShell"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO - Buffy",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -80,12 +82,14 @@
                 "name": "Command Prompt"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO - Van Helsing",
                 "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -nologo",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
@@ -94,6 +98,7 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO - Morbius",
                 "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
                 "elevate": true,
@@ -104,6 +109,7 @@
                 "startingDirectory": "%USERPROFILE%"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO",
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
@@ -112,6 +118,7 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO - Lincoln",
                 "commandline": "ssh 192.168.211.11",
                 "guid": "{4f4d9e15-12cd-40f9-b2a1-18ae553c45cf}",
@@ -123,6 +130,7 @@
                 "suppressApplicationTitle": true
             },
             {
+                "adjustIndistinguishableColors": "never",
                 "colorScheme": "Dracula PRO",
                 "commandline": "ssh klass-macbook-pro-16-2023",
                 "guid": "{87357170-25d4-488d-a162-42ccd889819d}",
@@ -134,6 +142,7 @@
                 "suppressApplicationTitle": true
             },
             {
+                "adjustIndistinguishableColors": "never",
                 "colorScheme": "Dracula PRO - Van Helsing",
                 "commandline": "ssh Klass-Mac-mini-2020-M1",
                 "guid": "{d666f29d-9072-402b-94f2-45caee839218}",
@@ -145,6 +154,7 @@
                 "suppressApplicationTitle": true
             },
             {
+                "adjustIndistinguishableColors": "never",
                 "colorScheme": "Dracula PRO - Buffy",
                 "commandline": "ssh Mias-MacBook-Pro-16-2021",
                 "guid": "{47457f15-538f-4599-80a7-7b890cce91e2}",
@@ -156,6 +166,7 @@
                 "suppressApplicationTitle": true
             },
             {
+                "adjustIndistinguishableColors": "indexed",
                 "colorScheme": "Dracula PRO - Lincoln",
                 "commandline": "ssh DS412",
                 "guid": "{660ed4b9-15bd-426e-aff2-97e247827718}",
@@ -540,50 +551,6 @@
         }
     ],
     "tabSwitcherMode": "mru",
-    "themes": 
-    [
-        {
-            "name": "legacyDark",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "dark",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacyLight",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "light",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacySystem",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "system",
-                "useMica": false
-            }
-        }
-    ],
+    "themes": [],
     "useAcrylicInTabRow": true
 }
