@@ -14,6 +14,9 @@ AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\se
 
 # Terminal settings
 AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+
+# lsd settings
+AppData\Roaming\lsd\config.yaml
 "
 $LinkList = $LinkListString -split "`n"
 foreach ($LinkLineString in $LinkList) {
@@ -32,7 +35,7 @@ foreach ($LinkLineString in $LinkList) {
                     Copy-Item -Path $Link -Destination "$Link.$(Get-Date -UFormat "%Y%m%dT%H%M%S").bak"
                 }
                 Write-Verbose "Linking '$Link'"
-                sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$Link
+                sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$LinkBase
             }
         }
     }

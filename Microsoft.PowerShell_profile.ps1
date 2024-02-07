@@ -6,6 +6,7 @@ $env:Path += ";$env:USERPROFILE\bin;$PSScriptRoot/MyScripts"
 $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_*\ripgrep-*-x86_64-pc-windows-msvc)
 $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\sharkdp.bat_Microsoft.Winget.Source_*\bat-v*-x86_64-pc-windows-msvc)
 $env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\sharkdp.fd_Microsoft.Winget.Source_*\fd-v*-x86_64-pc-windows-msvc)
+$env:Path += ";" + (Resolve-Path $env:LOCALAPPDATA/Microsoft\WinGet\Packages\lsd-rs.lsd_Microsoft.Winget.Source_*\lsd-v1*-x86_64-pc-windows-msvc)
 
 $env:CodeDir = "$env:USERPROFILE/code"
 
@@ -15,6 +16,8 @@ $env:FZF_DEFAULT_OPTS = "--ansi --select-1 --height ~40% --reverse --tiebreak=be
 
 ################################# Aliases and simple functions #################################
 Set-Alias g git
+# lsd gets permission denied too often, may be fixed with "--permission disable" https://cgithub.com/lsd-rs/lsd/issues/375
+#Set-Alias ls lsd
 Set-Alias trash Remove-ItemSafely
 function .. { Set-Location .. }
 function yb {
