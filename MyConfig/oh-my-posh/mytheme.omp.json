@@ -53,7 +53,7 @@
           "type": "root",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-          "foreground": "p:white",
+          "foreground": "p:black",
           "background": "p:yellow",
           "template": " \uf0e7 "
         },
