@@ -34,7 +34,7 @@ JanDeDobbeleer.OhMyPosh, junegunn.fzf, gerardog.gsudo, BurntSushi.ripgrep.MSVC, 
 Microsoft.VisualStudioCode, Microsoft.PowerShell
 
 # games
-Valve.Steam
+Valve.Steam, Overwolf.CurseForge
 # Discord.Discord kept starting up at startup
 
 "
