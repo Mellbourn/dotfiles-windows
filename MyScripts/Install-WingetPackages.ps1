@@ -12,7 +12,8 @@ Git.Git
 #Microsoft.DirectX
 Intel.IntelDriverAndSupportAssistant, Kingston.SSDManager, SteelSeries.GG
 # display
-Nvidia.GeForceExperience
+# I want to install NVIDIA app instead, but that does not have a nice name
+#Nvidia.GeForceExperience
 # Windows HDR Calibration
 9N7F2SM5D1LR
 # Windows Scanner
