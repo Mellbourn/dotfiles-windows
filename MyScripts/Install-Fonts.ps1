@@ -23,6 +23,9 @@ for ($i = 0; $i -lt $InstallFontsList.Length; $i++) {
 Pop-Location
 Pop-Location
 
+# Load the System.Drawing assembly to work with fonts
+Add-Type -AssemblyName System.Drawing
+
 # Set the User-Agent header to avoid issues with GitHub API rate limiting
 $headers = @{ 'User-Agent' = 'Mozilla/5.0' }
 
@@ -42,7 +45,7 @@ $zipPath = "$env:TEMP\CascadiaCode.zip"
 $extractPath = "$env:TEMP\CascadiaCodeFonts"
 
 # Download the zip file
-Write-Host "Downloading CascadiaCode zip file..."
+Write-Verbose "Downloading CascadiaCode zip file..."
 Invoke-WebRequest -Uri $zipUrl -Headers $headers -OutFile $zipPath
 
 # Clean up any existing extraction directory
@@ -50,22 +53,67 @@ If (Test-Path $extractPath) {
   Remove-Item $extractPath -Recurse -Force
 }
 
-Write-Host "Extracting fonts..."
+Write-Verbose "Extracting fonts..."
 Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath
 
-# Get the list of font files (ttf and otf)
-$fontFiles = Get-ChildItem -Path $extractPath -Include *.ttf, *.otf -Recurse
+# Get the list of font files (only OTF)
+$fontFiles = Get-ChildItem -Path $extractPath -Include *.otf -Recurse
 
-Write-Host "Installing fonts..."
+# Function to retrieve installed fonts from a registry path
+function Get-InstalledFontFilesFromRegistry {
+  param (
+    [string]$registryPath
+  )
+  $installedFonts = @{}
+  try {
+    $fontRegistryEntries = Get-ItemProperty -Path $registryPath
+    foreach ($prop in $fontRegistryEntries.PSObject.Properties) {
+      $fontFileName = [System.IO.Path]::GetFileName($prop.Value).ToLower()
+      if (-not [string]::IsNullOrEmpty($fontFileName)) {
+        $installedFonts[$fontFileName] = $true
+      }
+    }
+  }
+  catch {
+    Write-Verbose "Registry path $registryPath not found or inaccessible."
+  }
+  return $installedFonts
+}
+
+Write-Verbose "Retrieving installed fonts from registry..."
+
+# Retrieve installed fonts from HKLM and HKCU
+$installedFontsHKLM = Get-InstalledFontFilesFromRegistry -registryPath "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+$installedFontsHKCU = Get-InstalledFontFilesFromRegistry -registryPath "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+
+# Combine the installed fonts into one hashtable
+$installedFontFiles = @{}
+foreach ($fontFile in @($installedFontsHKLM.Keys + $installedFontsHKCU.Keys)) {
+  $installedFontFiles[$fontFile] = $true
+}
+
+Write-Verbose "Total installed fonts found: $($installedFontFiles.Count)"
+
+Write-Verbose "Installing fonts..."
 $shellApp = New-Object -ComObject Shell.Application
 $fontsFolder = $shellApp.Namespace(0x14)  # Special folder for Fonts
 
+# Suppress confirmation prompts and UI
+$copyHereFlags = 0x14  # FOF_NOCONFIRMATION (0x10) + FOF_NOERRORUI (0x4)
+
 foreach ($fontFile in $fontFiles) {
-  Write-Host "Installing $($fontFile.Name)..."
-  $fontsFolder.CopyHere($fontFile.FullName)
+  $fontFileName = $fontFile.Name.ToLower()
+  if ($installedFontFiles.ContainsKey($fontFileName)) {
+    Write-Verbose "Font file '$($fontFile.Name)' is already installed. Skipping."
+    continue
+  }
+  else {
+    Write-Verbose "Installing $($fontFile.Name)..."
+    $fontsFolder.CopyHere($fontFile.FullName, $copyHereFlags)
+  }
 }
 
-Write-Host "Fonts installed successfully."
+Write-Verbose "Font installation process completed."
 
 # Clean up temporary files
 Remove-Item $zipPath -Force
