@@ -21,7 +21,7 @@ function Invoke-RecurrentCommands {
     Write-Verbose "Running programs..."
     ArmouryCrate.exe
     Start-Process -FilePath "$env:ProgramFiles\Kingston_SSD_Manager\KSM_Gen15.exe"
-    Start-Process "$env:ProgramFiles\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe"
+    Start-Process "$env:ProgramFiles\NVIDIA Corporation\NVIDIA app\CEF\NVIDIA app.exe"
 
     Write-Verbose "Installing windows updates:"
     if ($Verbose) {
