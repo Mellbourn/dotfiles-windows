@@ -36,7 +36,8 @@ Microsoft.VisualStudioCode, Microsoft.PowerShell
 
 # games
 Valve.Steam, Overwolf.CurseForge
-# Discord.Discord kept starting up at startup
+# keeps starting up at startup
+Discord.Discord
 
 "
 $wingetList = winget list | Out-String
