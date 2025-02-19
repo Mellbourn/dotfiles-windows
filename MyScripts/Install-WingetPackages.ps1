@@ -32,7 +32,7 @@ Google.Chrome.Beta, VideoLAN.VLC
 JanDeDobbeleer.OhMyPosh, junegunn.fzf, BurntSushi.ripgrep.MSVC, sharkdp.fd, jftuga.less, sharkdp.bat, lsd-rs.lsd
 
 # developer
-Microsoft.VisualStudioCode, Microsoft.PowerShell
+Microsoft.VisualStudioCode, Microsoft.PowerShell, Microsoft.DotNet.Runtime.9
 
 # games
 Valve.Steam, Overwolf.CurseForge
