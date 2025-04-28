@@ -42,8 +42,7 @@
           "template": " \uea83 {{ .Path }} ",
           "foreground": "#f2f3f8",
           "background": "#0087af",
-          "type": "path",
-          "invert_powerline": true
+          "type": "path"
         },
         {
           "properties": {
