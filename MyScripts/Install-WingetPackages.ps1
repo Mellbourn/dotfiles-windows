@@ -39,6 +39,8 @@ Microsoft.VisualStudioCode, Microsoft.PowerShell, Microsoft.DotNet.Runtime.9
 Valve.Steam, Overwolf.CurseForge
 # keeps starting up at startup
 Discord.Discord
+# for dps meter
+WiresharkFoundation.Wireshark, Insecure.Npcap
 
 "
 $wingetList = winget list | Out-String
