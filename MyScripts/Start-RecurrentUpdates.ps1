@@ -25,10 +25,10 @@ function Invoke-RecurrentCommands {
 
     Write-Verbose "Installing windows updates:"
     if ($Verbose) {
-        sudo Get-WindowsUpdate -AcceptAll -Install -AutoReboot -Verbose
+        sudo powershell.exe -c "Get-WindowsUpdate -AcceptAll -Install -AutoReboot -Verbose"
     }
     else {
-        sudo Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+        sudo powershell.exe -c "Get-WindowsUpdate -AcceptAll -Install -AutoReboot"
     }
     Start-Process "ms-settings:windowsupdate-optionalupdates"
 

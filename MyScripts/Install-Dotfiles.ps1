@@ -14,7 +14,7 @@ if (Get-Command "git.exe" -ErrorAction SilentlyContinue) {
 }
 
 if ((Get-ExecutionPolicy) -ne "RemoteSigned") {
-  gsudo -u $env:USERNAME { Set-ExecutionPolicy RemoteSigned }
+  sudo powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force"
 }
 
 Write-Verbose "Make dotfiles always available on this device"
