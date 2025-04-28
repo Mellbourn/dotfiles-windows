@@ -1,18 +1,10 @@
+[include]
+    path = .gitconfig.aliases
 [core]
     autocrlf = input
     safecrlf = false
 [mergetool]
     keepbackup = false
-[alias]
-    ci = commit
-    br = branch
-    co = checkout
-    st = status
-    mt = mergetool
-    dt = difftool
-    last = log -1 HEAD
-    lol = log --graph --all
-    lo = log --graph
 [fetch]
     prune = true
 [log]

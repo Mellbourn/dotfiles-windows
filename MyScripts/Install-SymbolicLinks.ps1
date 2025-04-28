@@ -5,6 +5,7 @@ Write-Verbose "Symbolic links"
 $LinkListString = "
 # git config
 .gitconfig
+.gitconfig.aliases
 
 # SSH Config
 .ssh\config
@@ -35,7 +36,7 @@ foreach ($LinkLineString in $LinkList) {
                     Copy-Item -Path $Link -Destination "$Link.$(Get-Date -UFormat "%Y%m%dT%H%M%S").bak"
                 }
                 Write-Verbose "Linking '$Link'"
-                sudo New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$LinkBase
+                sudo powershell -c "New-Item -Force -ItemType SymbolicLink -Path $Link -Target $PSScriptRoot\..\HomeLinkTargets\$LinkBase"
             }
         }
     }
