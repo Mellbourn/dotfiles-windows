@@ -22,7 +22,8 @@ Intel.IntelDriverAndSupportAssistant, Kingston.SSDManager, SteelSeries.GG
 SanfordLP.DYMOConnect
 
 # security
-Bitwarden.Bitwarden, schollz.croc, Twilio.Authy,  PrivateInternetAccess.PrivateInternetAccess
+Bitwarden.Bitwarden, schollz.croc, Twilio.Authy
+#PrivateInternetAccess.PrivateInternetAccess
 
 # misc
 Google.Chrome.Beta, VideoLAN.VLC
