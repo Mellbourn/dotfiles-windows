@@ -42,7 +42,9 @@ Valve.Steam, Overwolf.CurseForge
 # keeps starting up at startup
 Discord.Discord
 # for dps meter
-WiresharkFoundation.Wireshark, Insecure.Npcap
+WiresharkFoundation.Wireshark
+# npcap may not be needed for the dps meter
+#Insecure.Npcap
 
 "
 $wingetList = winget list | Out-String
