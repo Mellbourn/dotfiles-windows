@@ -11,6 +11,8 @@ Git.Git
 # without DirectX Everquests throws Missing d3dx9_43.dll. Note, winget fails to detect this being installed
 #Microsoft.DirectX
 Intel.IntelDriverAndSupportAssistant, Kingston.SSDManager, SteelSeries.GG
+# Rollermouse
+ContourDesign.ContourPointingDevices
 # display
 # I want to install NVIDIA app instead, but that does not have a nice name
 #Nvidia.GeForceExperience
