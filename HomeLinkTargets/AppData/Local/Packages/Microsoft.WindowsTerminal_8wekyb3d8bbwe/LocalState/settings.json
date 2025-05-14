@@ -33,7 +33,7 @@
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-    "firstWindowPreference": "persistedWindowLayout",
+    "firstWindowPreference": "defaultProfile",
     "initialCols": 155,
     "initialRows": 43,
     "keybindings": 
