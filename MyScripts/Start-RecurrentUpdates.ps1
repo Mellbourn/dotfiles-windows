@@ -25,10 +25,10 @@ function Invoke-RecurrentCommands {
 
     Write-Verbose "Installing windows updates:"
     if ($Verbose) {
-        sudo powershell.exe -c "Get-WindowsUpdate -AcceptAll -Install -AutoReboot -Verbose"
+        sudo powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Import-Module '$env:USERPROFILE\OneDrive\Dokument\PowerShell\Modules\PSWindowsUpdate'; Get-WindowsUpdate -AcceptAll -Install -AutoReboot -Verbose}"
     }
     else {
-        sudo powershell.exe -c "Get-WindowsUpdate -AcceptAll -Install -AutoReboot"
+        sudo powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Import-Module '$env:USERPROFILE\OneDrive\Dokument\PowerShell\Modules\PSWindowsUpdate'; Get-WindowsUpdate -AcceptAll -Install -AutoReboot}"
     }
     Start-Process "ms-settings:windowsupdate-optionalupdates"
 
