@@ -44,7 +44,7 @@ Discord.Discord
 # for dps meter
 WiresharkFoundation.Wireshark
 # npcap may not be needed for the dps meter
-#Insecure.Npcap
+Insecure.Npcap
 
 "
 $wingetList = winget list | Out-String
