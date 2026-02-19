@@ -35,14 +35,14 @@ Google.Chrome.Beta, VideoLAN.VLC
 JanDeDobbeleer.OhMyPosh, junegunn.fzf, BurntSushi.ripgrep.MSVC, sharkdp.fd, jftuga.less, sharkdp.bat, lsd-rs.lsd
 
 # developer
-Microsoft.VisualStudioCode, Microsoft.PowerShell, Microsoft.DotNet.Runtime.9
+Microsoft.VisualStudioCode, Microsoft.PowerShell, Microsoft.DotNet.Runtime.9, Anysphere.Cursor
 
 # games
 Valve.Steam, Overwolf.CurseForge
 # keeps starting up at startup
 Discord.Discord
-# for dps meter
-WiresharkFoundation.Wireshark
+# for dps meter, not always latest though 4.6.0 did not work with Parser.exe
+#WiresharkFoundation.Wireshark
 # npcap may not be needed for the dps meter
 Insecure.Npcap
 
