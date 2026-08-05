@@ -36,6 +36,7 @@ JanDeDobbeleer.OhMyPosh, junegunn.fzf, BurntSushi.ripgrep.MSVC, sharkdp.fd, jftu
 
 # developer
 Microsoft.VisualStudioCode, Microsoft.PowerShell, Microsoft.DotNet.Runtime.9, Anysphere.Cursor
+Microsoft.DotNet.SDK.10, GitHub.cli
 
 # games
 Valve.Steam, Overwolf.CurseForge
